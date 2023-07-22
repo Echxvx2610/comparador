@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
-from bom_check import comparador
+#from bom_check import comparador
+from comparador_pruebas import comparador
 import os
 import subprocess
 
@@ -8,20 +9,27 @@ def main():
     #sg.theme_previewer()
     sg.theme('LightGreen3')
     layout = [
+        [sg.Image(r'comparador\img\LOGO_NAVICO_1_90-black.png',expand_x=False,expand_y=False,enable_events=True,key='-LOGO-'),sg.Push()],
         [sg.Input(default_text='Ruta archivo Syteline',key='-BOM-',enable_events=True,size=(65,10),readonly=True),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar BOM",)],
         [sg.Input(default_text='Ruta archivo Placement Flexa ',key='-FLEXA-',enable_events=True,size=(60,10),readonly=True),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar Placement",)],
         [sg.Button('Comparar'),sg.Button('Salir')],        
     ]
     
      
-    window = sg.Window('....::: Flexa vs BOM :::.....',layout,finalize=True,no_titlebar=False,element_justification='center',icon='comparador\img\compare_4222.ico',keep_on_top=False)
+    window = sg.Window('......::: Flexa vs BOM :::......',
+                       layout,finalize=True,
+                       no_titlebar=False,
+                       element_justification='center',
+                       icon='comparador\img\document.ico',
+                       keep_on_top=False
+                       )
     def flexa_vs_bom():
         comparador(values['-BOM-'],values['-FLEXA-'])
         sg.popup('Comparacion completada con exito!')
     
     def reset():
-        window['-BOM-'].update('')
-        window['-FLEXA-'].update('')
+        window['-BOM-'].update('Ruta archivo Syteline')
+        window['-FLEXA-'].update('Ruta archivo Placement Flexa ')
         
     def open_folder_in_explorer(folder_path):
         if os.path.exists(folder_path):
@@ -50,10 +58,10 @@ def main():
                 open_folder_in_explorer(csv_folder)
                 
             except:
-                sg.popup_error('No se pudo realizar la comparacion\nIntente de nuevo')
+                sg.popup_error('No se pudo realizar la comparacion\nIntentelo de nuevo')
                   
     window.close()
 
 
 if __name__ == '__main__':
-    main()
+    main() 
