@@ -1,0 +1,16 @@
+Operation,Part Number,Description,Reference,Board,Skip,Comparacion
+20,140-0704-00,SOLDER PASTE SAC305 SENJU,,,,Solo en BOM
+20,051-1279-00,C_DCL IC BLANK .30 X .45,,,,Solo en BOM
+20,017-21738-C0,PCB FLOYD-9 DUAL uSD,,,,Solo en BOM
+,106-0299-02,,C2,1,No,Solo en Placement
+,106-0299-02,,C2,3,No,Solo en Placement
+,106-0299-02,,C2,5,No,Solo en Placement
+,106-0299-02,,C2,7,No,Solo en Placement
+,106-0299-02,,C2,9,No,Solo en Placement
+,106-0299-02,,C2,11,No,Solo en Placement
+,106-0299-02,,C2,13,No,Solo en Placement
+,106-0299-02,,C2,15,No,Solo en Placement
+,106-0299-02,,C2,17,No,Solo en Placement
+,106-0299-02,,C2,19,No,Solo en Placement
+,106-0299-02,,C2,21,No,Solo en Placement
+,106-0299-02,,C2,23,No,Solo en Placement

@@ -1,0 +1,9 @@
+Operation,Part Number,Description,Reference,Board,Skip,Comparacion
+20,140-0704-00,SOLDER PASTE SAC305 SENJU,,,,Solo en BOM
+10,140-0704-00,SOLDER PASTE SAC305 SENJU,,,,Solo en BOM
+20,014-26058-151,IC LPDDR4 16Gb 1.1V SDRAM FBGA200,U2,,,Solo en BOM
+10,017-30116-A0,@PCB iMX8M PLUS QUAD CPU BROAD PHY,PCB,,,Solo en BOM
+,014-26058-151X,,U2,1,No,Solo en Placement
+,014-26058-151X,,U2,2,No,Solo en Placement
+,014-26058-151X,,U2,3,No,Solo en Placement
+,014-26058-151X,,U2,4,No,Solo en Placement

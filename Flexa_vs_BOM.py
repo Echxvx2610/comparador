@@ -7,12 +7,13 @@ import subprocess
 def main():
     #mostrar todos los temas
     #sg.theme_previewer()
-    sg.theme('LightGreen3')
+    #sg.theme('LightGreen5')
+    sg.theme("DefaultNoMoreNagging")
     layout = [
         [sg.Image(r'comparador\img\LOGO_NAVICO_1_90-black.png',expand_x=False,expand_y=False,enable_events=True,key='-LOGO-'),sg.Push()],
-        [sg.Input(default_text='Ruta archivo Syteline',key='-BOM-',enable_events=True,size=(65,10),readonly=True),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar BOM",)],
-        [sg.Input(default_text='Ruta archivo Placement Flexa ',key='-FLEXA-',enable_events=True,size=(60,10),readonly=True),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar Placement",)],
-        [sg.Button('Comparar'),sg.Button('Salir')],        
+        [sg.Input(default_text='Ruta archivo Syteline',key='-BOM-',enable_events=True,size=(65,10),readonly=True,justification='center',font=('Arial',10,'italic')),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar BOM",)],
+        [sg.Input(default_text='Ruta archivo Placement Flexa ',key='-FLEXA-',enable_events=True,size=(60,10),readonly=True,justification='center',font=('Arial',10,'italic')),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar Placement",)],
+        [sg.Button("Abrir y Editar",key='-OPEN-'),sg.Button('Comparar'),sg.Button('Salir')],        
     ]
     
      
@@ -30,6 +31,19 @@ def main():
     def reset():
         window['-BOM-'].update('Ruta archivo Syteline')
         window['-FLEXA-'].update('Ruta archivo Placement Flexa ')
+    
+    def open_excel_and_get_path(file_path):
+        try:
+            # Abrir el archivo con Excel
+            os.startfile(file_path)
+            
+            # Esperar a que el usuario cierre Excel y luego obtener la ruta de acceso del archivo guardado
+            sg.popup_quick_message("Por favor, edita el archivo en Excel y guárdalo.", auto_close_duration=5)
+            
+            return file_path
+        except Exception as e:
+            sg.popup_error(f"Error: {str(e)}")
+            return None
         
     def open_folder_in_explorer(folder_path):
         if os.path.exists(folder_path):
@@ -49,17 +63,23 @@ def main():
         if event == '-FLEXA-':
             ruta_flexa = values['-FLEXA-'] 
             
-        if event == 'Comparar':
-            try:
+        if event == 'Comparar':            
+             try:
                 flexa_vs_bom()
                 reset()
                 csv_folder = r"C:\Users\CECHEVARRIAMENDOZA\OneDrive - Brunswick Corporation\Documents\Proyectos_Python\PysimpleGUI\Proyectos\comparador\csv"
                 # Abre el explorador de archivos en la ruta específica
                 open_folder_in_explorer(csv_folder)
-                
-            except:
-                sg.popup_error('No se pudo realizar la comparacion\nIntentelo de nuevo')
-                  
+               
+             except:
+                 sg.popup('No se pudo realizar la comparacion,\nIntentelo de nuevo')
+        if event == '-OPEN-':
+            file_path = values['-FLEXA-']
+            if file_path:
+                edited_file_path = open_excel_and_get_path(file_path)
+                if edited_file_path:
+                    window["-FLEXA-"].update(edited_file_path)
+                    
     window.close()
 
 

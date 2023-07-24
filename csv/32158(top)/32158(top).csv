@@ -1,0 +1,13 @@
+Operation,Part Number,Description,Reference,Board,Skip,Comparacion
+20.0,016-32063-06,DIODE SCHOTTKY 100V 3A DO214AC,D4,,,Solo en BOM
+20.0,FLG-RTNG,THIS UNIT HAS AN APPROVED ROUTING CHANGE,,,,Solo en BOM
+20.0,017-32068-A0,PCB SYRMA 980018370-004,PCB,,,Solo en BOM
+20.0,016-32060-05,"LED MOUNT .120"" < 4.3 mm width",SPACER2,,,Solo en BOM
+20.0,016-32060-05,"LED MOUNT .120"" < 4.3 mm width",SPACER5,,,Solo en BOM
+,114-32151-B6Y,,R7,1.0,No,Solo en Placement
+,016-32063-06X,,D4,1.0,No,Solo en Placement
+,016-32063-06X,,D4,2.0,No,Solo en Placement
+,016-32063-06X,,D4,3.0,No,Solo en Placement
+,016-32063-06X,,D4,4.0,No,Solo en Placement
+,016-32063-06X,,D4,5.0,No,Solo en Placement
+,016-32063-06X,,D4,6.0,No,Solo en Placement
