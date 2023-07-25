@@ -57,6 +57,9 @@ def comparador(ruta_bom,ruta_flexa):
         else:
             exit()
     #placement.to_csv(r'C:\Users\CECHEVARRIAMENDOZA\OneDrive - Brunswick Corporation\Documents\Proyectos_Python\PysimpleGUI\Proyectos\comparador\csv\placement.csv',index=False)
+    
+    
+    
     #******************************************************************* COMPARACION ******************************************************************
     comparacion = bom_filter.merge(placement, on = ['Part Number','Reference'], how='outer',suffixes=('_izq', '_der'), indicator=True)
     comparacion.rename(columns={'_merge':'Comparacion'},inplace=True)
@@ -88,7 +91,7 @@ def table(data_to_display,skipeados):
               [sg.Button("Cerrar")]]
 
     # Creamos la ventana del popup
-    window = sg.Window("Componentes con Skip", layout)
+    window = sg.Window("Componentes con Skip", layout,element_justification='center')
 
     # Mostramos el popup y esperamos a que el usuario lo cierre
     while True:
