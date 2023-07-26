@@ -69,7 +69,7 @@ def comparador(ruta_bom,ruta_flexa):
     only_bom = comparacion[comparacion['Comparacion'] == 'left_only']
     only_placement = comparacion[comparacion['Comparacion'] == 'right_only']
     nombre_excel_sin_extension = os.path.splitext(os.path.basename(ruta_flexa))[0]
-    carpeta_nombre_archivo = r"C:\Users\CECHEVARRIAMENDOZA\OneDrive - Brunswick Corporation\Documents\Proyectos_Python\PysimpleGUI\Proyectos\comparador\csv\{nombre_excel_sin_extension}".format(nombre_excel_sin_extension=nombre_excel_sin_extension)
+    carpeta_nombre_archivo = r"H:\Ingenieria\SMT\Flexa_vs_BOM\{nombre_excel_sin_extension}".format(nombre_excel_sin_extension=nombre_excel_sin_extension)
     #print(nombre_excel_sin_extension)
     #print(carpeta_nombre_archivo)
     os.makedirs(carpeta_nombre_archivo, exist_ok=True)
