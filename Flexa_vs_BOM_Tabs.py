@@ -1,9 +1,11 @@
 import PySimpleGUI as sg    
-from bom_check import comparador
-#from comparador_pruebas import comparador
+#from bom_check import comparador
+from comparador_pruebas import comparador
 import os
 import subprocess
 import logger
+
+logger = logger.setup_logger(r'comparador\data.log')
 
 #Implementacion de un layout Tab para duplicar la aplicacion y comparar con BOM para Nexim
 def main():
@@ -39,9 +41,10 @@ def main():
                         )
     #Comparacion Flexa vs BOM
     def flexa_vs_bom():
-            comparador(values['-BOM-'],values['-FLEXA-'])
-            sg.popup('Comparacion completada con exito!')
-        
+        comparador(values['-BOM-'],values['-FLEXA-'])
+        sg.popup('Comparacion completada con exito!')
+            
+            
     def reset():
         window['-BOM-'].update('Ruta archivo Syteline')
         window['-FLEXA-'].update('Ruta archivo Placement Flexa ')
@@ -57,6 +60,7 @@ def main():
             return file_path
         except Exception as e:
             sg.popup_error(f"Error: {str(e)}")
+            logger.error(str(e))
             return None
         
     def open_folder_in_explorer(folder_path):
@@ -65,6 +69,7 @@ def main():
                 subprocess.Popen(f'explorer "{folder_path}"')
             except Exception as e:
                 sg.popup_error(f"No se pudo abrir la carpeta:\n\n{e}")
+                logger.error(f"No se pudo abrir la carpeta:\n\n{e}")
         else:
             sg.popup_error("La carpeta no existe.")   
     
@@ -72,22 +77,17 @@ def main():
         event,values = window.read()
         if event == 'Salir' or event == sg.WIN_CLOSED:
             break
-        if event == '-SBOM-':
-            ruta_bom = values['-BOM-']
-        if event == '-FLEXA-':
-            ruta_flexa = values['-FLEXA-'] 
-            
-        if event == 'Comparar':            
-             try:
+        
+        if event == 'Comparar':
+            try:
                 flexa_vs_bom()
                 reset()
                 csv_folder = r"H:\Ingenieria\SMT\Flexa_vs_BOM"
                 # Abre el explorador de archivos en la ruta específica
                 open_folder_in_explorer(csv_folder)
-            #  except Exception as e:
-            #     sg.popup_error(f"Error: {str(e)}")
-             except:
+            except Exception as e:
                 sg.popup('No se pudo realizar la comparacion,\nIntentelo de nuevo')
+                logger.error(str(e))
         if event == '-OPEN-':
             file_path = values['-FLEXA-']
             if file_path:
@@ -96,11 +96,8 @@ def main():
                     window["-FLEXA-"].update(edited_file_path)
     
     #Comparacion Nexim vs BOM
-    
-    
-    
                     
     window.close()
     
 if __name__ == '__main__':
-    main() 
+    main()

@@ -4,6 +4,11 @@ from openpyxl import workbook,load_workbook
 import csv
 import PySimpleGUI as sg
 import os
+import logger
+
+#configuracion de logger
+logger = logger.setup_logger(r'comparador\data.log')
+
 
 #......................:::: CONFIGURACION DEL DATAFRAME ::::..................
 pd.set_option('display.max_columns', None)
@@ -11,7 +16,7 @@ pd.set_option('display.max_rows', None)
 pd.set_option('display.width', None)
 #pd.set_option('expand_frame_repr', False)
 
-#...........................:::: variales globales ::::....................
+#...........................:::: Variales Globales ::::....................
 skipeados = ""
 data_to_display = ""
 
@@ -40,44 +45,42 @@ def comparador(ruta_bom,ruta_flexa):
     flexa = pd.read_excel(ruta_flexa, engine='openpyxl')                                                # leemos el archivo excel de flexa
     placement = pd.DataFrame(flexa)                                                                     # convertimos a dataframe
     placement.rename(columns={'Ref.':'Reference'},inplace=True)                                         # Renombramos columna(Ref. a Reference)
-    placement = placement[['Board','Part Number','Reference','Skip']]
-    if "Yes" in placement['Skip'].values:
-        #print(placement['Skip'].values == "Yes") 
+    placement = placement[['Board','Part Number','Reference','Skip']]                                   # Seleccionamos las columnas deseadas(Board,Part Number,Reference,Skip)
+    if "Yes" in placement['Skip'].values:                                                               # Si se encuentra skip en el archivo
+        #print(placement['Skip'].values == "Yes")                                                       # alertamos al usuario 
         title = "! Alerta !"
         message = """Se encontraron componentes con skip en el archivo!"""
         sg.popup(message, title=title)
         skipeados = placement[placement['Skip']=='Yes']
-        #print(skipeados)
-        #print(skipeados.columns)
-        data_to_display = skipeados.values.tolist()
-        table(data_to_display,skipeados)
+        logger.info(f'Se encontraron {len(skipeados)} componentes con skip en el archivo {ruta_flexa}')
+        data_to_display = skipeados.values.tolist()                                                    # convertimos a lista todos los elementos con skip
+        table(data_to_display,skipeados)                                                               # creamos la tabla y desplegamos la tabla
         respuesta = sg.popup_yes_no("Desea continuar?",title=title)
         if respuesta == "Yes":
+            logger.info(f"Se decidio continuar con la comparacion del archivo {ruta_flexa}")
             #adaptar comparacion + componentes skipeados
             pass
         else:
-            exit()
-    #placement.to_csv(r'C:\Users\CECHEVARRIAMENDOZA\OneDrive - Brunswick Corporation\Documents\Proyectos_Python\PysimpleGUI\Proyectos\comparador\csv\placement.csv',index=False)
+            exit()                                                                                     # salimos del programa si no quiere continuar
+            logger.info(f"No se realizo la comparacion del archivo {ruta_flexa}")
+    
     #******************************************************************* COMPARACION ******************************************************************
-    comparacion = bom_filter.merge(placement, on = ['Part Number','Reference'], how='outer',suffixes=('_izq', '_der'), indicator=True)
-    comparacion.rename(columns={'_merge':'Comparacion'},inplace=True)
-    comparacion['Comparacion'] = comparacion['Comparacion'].replace({
+    comparacion = bom_filter.merge(placement, on = ['Part Number','Reference'], how='outer',suffixes=('_izq', '_der'), indicator=True)          # Juntamos los dataframes
+    comparacion.rename(columns={'_merge':'Comparacion'},inplace=True)                                                                           # renombramos la columna merge por Comparacion
+    comparacion['Comparacion'] = comparacion['Comparacion'].replace({                                                                           # personalizamos la columna comparacion
     'left_only': 'Solo en BOM',
     'right_only': 'Solo en Placement',
     'both': 'En ambos archivos'
     })
     only_bom = comparacion[comparacion['Comparacion'] == 'left_only']
     only_placement = comparacion[comparacion['Comparacion'] == 'right_only']
-    nombre_excel_sin_extension = os.path.splitext(os.path.basename(ruta_flexa))[0]
-    carpeta_nombre_archivo = r"H:\Ingenieria\SMT\Flexa_vs_BOM\{nombre_excel_sin_extension}".format(nombre_excel_sin_extension=nombre_excel_sin_extension)
-    #print(nombre_excel_sin_extension)
-    #print(carpeta_nombre_archivo)
+    nombre_excel_sin_extension = os.path.splitext(os.path.basename(ruta_flexa))[0]                                                             # creamos el nombre del archivo sin extension
+    logger.info(f'Se realizo la comparacion entre {ruta_flexa} y {ruta_bom}')
+    carpeta_nombre_archivo = r"H:\Ingenieria\SMT\Flexa_vs_BOM\{nombre_excel_sin_extension}".format(nombre_excel_sin_extension=nombre_excel_sin_extension) # creamos la carpeta donde se guardara el archivo
     os.makedirs(carpeta_nombre_archivo, exist_ok=True)
     ruta_csv = os.path.join(carpeta_nombre_archivo,f"{nombre_excel_sin_extension}.csv")
-    #print(ruta_csv)
     comparacion_final = comparacion[comparacion['Comparacion'] != 'En ambos archivos']
-    comparacion_final.to_csv(ruta_csv,index=False)
-    #comparacion.to_csv(ruta_csv,index=False)
+    comparacion_final.to_csv(ruta_csv,index=False)                                                                                             # creamos un dataframe que contenga las diferencias y lo guardamos en CSV
     
 def table(data_to_display,skipeados):
     # Creamos el diseño de la tabla utilizando PySimpleGUI

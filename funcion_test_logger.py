@@ -1,7 +1,7 @@
 import logger
 
 # Configurar el logger y obtener una instancia del logger
-logger = logger.setup_logger(r'my_log\app.log')
+logger = logger.setup_logger(r'comparador\app.log')
 
 def funcion_ejemplo():
     logger.debug('Este es un mensaje de depuración')

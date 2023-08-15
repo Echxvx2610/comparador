@@ -4,6 +4,11 @@ from openpyxl import workbook,load_workbook
 import csv
 import PySimpleGUI as sg
 import os
+import logger
+
+#configuracion de logger
+logger = logger.setup_logger(r'comparador\data.log')
+
 
 #......................:::: CONFIGURACION DEL DATAFRAME ::::..................
 pd.set_option('display.max_columns', None)
@@ -11,7 +16,7 @@ pd.set_option('display.max_rows', None)
 pd.set_option('display.width', None)
 #pd.set_option('expand_frame_repr', False)
 
-#...........................:::: variales globales ::::....................
+#...........................:::: Variales Globales ::::....................
 skipeados = ""
 data_to_display = ""
 
@@ -47,16 +52,17 @@ def comparador(ruta_bom,ruta_flexa):
         message = """Se encontraron componentes con skip en el archivo!"""
         sg.popup(message, title=title)
         skipeados = placement[placement['Skip']=='Yes']
-        #print(skipeados)
-        #print(skipeados.columns)
+        logger.info(f'Se encontraron {len(skipeados)} componentes con skip en el archivo {ruta_flexa}')
         data_to_display = skipeados.values.tolist()                                                    # convertimos a lista todos los elementos con skip
         table(data_to_display,skipeados)                                                               # creamos la tabla y desplegamos la tabla
         respuesta = sg.popup_yes_no("Desea continuar?",title=title)
         if respuesta == "Yes":
+            logger.info(f"Se decidio continuar con la comparacion del archivo {ruta_flexa}")
             #adaptar comparacion + componentes skipeados
             pass
         else:
             exit()                                                                                     # salimos del programa si no quiere continuar
+            logger.info(f"No se realizo la comparacion del archivo {ruta_flexa}")
     
     #******************************************************************* COMPARACION ******************************************************************
     comparacion = bom_filter.merge(placement, on = ['Part Number','Reference'], how='outer',suffixes=('_izq', '_der'), indicator=True)          # Juntamos los dataframes
@@ -69,6 +75,7 @@ def comparador(ruta_bom,ruta_flexa):
     only_bom = comparacion[comparacion['Comparacion'] == 'left_only']
     only_placement = comparacion[comparacion['Comparacion'] == 'right_only']
     nombre_excel_sin_extension = os.path.splitext(os.path.basename(ruta_flexa))[0]                                                             # creamos el nombre del archivo sin extension
+    logger.info(f'Se realizo la comparacion entre {ruta_flexa} y {ruta_bom}')
     carpeta_nombre_archivo = r"H:\Ingenieria\SMT\Flexa_vs_BOM\{nombre_excel_sin_extension}".format(nombre_excel_sin_extension=nombre_excel_sin_extension) # creamos la carpeta donde se guardara el archivo
     os.makedirs(carpeta_nombre_archivo, exist_ok=True)
     ruta_csv = os.path.join(carpeta_nombre_archivo,f"{nombre_excel_sin_extension}.csv")

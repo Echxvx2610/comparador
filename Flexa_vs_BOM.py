@@ -1,9 +1,8 @@
 import PySimpleGUI as sg
-from bom_check import comparador
+from bom_check import comparador,logger
 #from comparador_pruebas import comparador
 import os
 import subprocess
-import logger
 
 def main():
     #mostrar todos los temas
@@ -46,6 +45,7 @@ def main():
             return file_path
         except Exception as e:
             sg.popup_error(f"Error: {str(e)}")
+            logger.error(str(e))
             return None
         
     def open_folder_in_explorer(folder_path):
@@ -54,6 +54,7 @@ def main():
                 subprocess.Popen(f'explorer "{folder_path}"')
             except Exception as e:
                 sg.popup_error(f"No se pudo abrir la carpeta:\n\n{e}")
+                logger.error(f"No se pudo abrir la carpeta:\n\n{e}")
         else:
             sg.popup_error("La carpeta no existe.")   
     
@@ -71,8 +72,9 @@ def main():
                 open_folder_in_explorer(csv_folder)
             #  except Exception as e:
             #     sg.popup_error(f"Error: {str(e)}")
-             except:
+             except Exception as e:
                 sg.popup('No se pudo realizar la comparacion,\nIntentelo de nuevo')
+                logger.error(str(e))
         if event == '-OPEN-':
             file_path = values['-FLEXA-']
             if file_path:
