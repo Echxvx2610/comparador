@@ -24,7 +24,8 @@ def main():
                        no_titlebar=False,
                        element_justification='center',
                        icon='comparador\img\document.ico',
-                       keep_on_top=False
+                       keep_on_top=False,
+                       resizable=False
                        )
     def flexa_vs_bom():
         comparador(values['-BOM-'],values['-FLEXA-'])
@@ -60,11 +61,7 @@ def main():
         event,values = window.read()
         if event == 'Salir' or event == sg.WIN_CLOSED:
             break
-        if event == '-SBOM-':
-            ruta_bom = values['-BOM-']
-        if event == '-FLEXA-':
-            ruta_flexa = values['-FLEXA-'] 
-            
+        
         if event == 'Comparar':            
              try:
                 flexa_vs_bom()
