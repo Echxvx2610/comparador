@@ -1,11 +1,8 @@
 import PySimpleGUI as sg    
-#from bom_check import comparador
-from comparador_pruebas import comparador
+#from bom_check import comparador,logger
+from comparador_pruebas import comparador,logger,comparacion_nexim
 import os
 import subprocess
-import logger
-
-logger = logger.setup_logger(r'comparador\data.log')
 
 #Implementacion de un layout Tab para duplicar la aplicacion y comparar con BOM para Nexim
 def main():
@@ -14,7 +11,7 @@ def main():
             [sg.Image(r'comparador\img\LOGO_NAVICO_1_90-black.png',expand_x=False,expand_y=False,enable_events=True,key='-LOGO-'),sg.Push()],
             [sg.Input(default_text='Ruta archivo Syteline',key='-BOM-',enable_events=True,size=(65,10),readonly=True,justification='center',font=('Arial',10,'italic')),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar BOM",)],
             [sg.Input(default_text='Ruta archivo Placement Flexa ',key='-FLEXA-',enable_events=True,size=(60,10),readonly=True,justification='center',font=('Arial',10,'italic')),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar Placement",)],
-            [sg.Button("Abrir y Editar",key='-OPEN-'),sg.Button('Comparar'),sg.Button('Salir')],
+            [sg.Button("Abrir y Editar",key='-OPEN-'),sg.Button('Comparar',key='-COMPARE-'),sg.Button('Salir')],
             [sg.Text("Created by: Cristian Echevarría",font=('Arial',6,'italic'))],        
         ]
 
@@ -22,14 +19,14 @@ def main():
             [sg.Image(r'comparador\img\LOGO_NAVICO_1_90-black.png',expand_x=False,expand_y=False,enable_events=True,key='-LOGO2-'),sg.Push()],
             [sg.Input(default_text='Ruta archivo Syteline',key='-BOM2-',enable_events=True,size=(65,10),readonly=True,justification='center',font=('Arial',10,'italic')),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar BOM",)],
             [sg.Input(default_text='Ruta archivo Placement Flexa ',key='-FLEXA2-',enable_events=True,size=(60,10),readonly=True,justification='center',font=('Arial',10,'italic')),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar Placement",)],
-            [sg.Button("Abrir y Editar",key='-OPEN2-'),sg.Button('Comparar'),sg.Button('Salir')],
+            [sg.Button("Abrir y Editar",key='-OPEN2-'),sg.Button('Comparar',key='-COMPARE2-'),sg.Button('Salir')],
             [sg.Text("Created by: Cristian Echevarría",font=('Arial',6,'italic'))],        
         ]   
 
     layout = [
         [sg.TabGroup([
-            [sg.Tab("Flexa", tab1_layout,title_color='Red',element_justification= 'center'),
-            sg.Tab("Nexim", tab2_layout,element_justification= 'center')]],title_color='White',selected_background_color='Red',tab_background_color='black',),
+            [sg.Tab("Flexa", tab1_layout,element_justification= 'center'),
+            sg.Tab("Nexim", tab2_layout,element_justification= 'center')]],title_color='White',selected_background_color='red',tab_background_color='black',),
         ]]    
     
     window = sg.Window('......::: Flexa vs BOM :::......',
@@ -39,7 +36,8 @@ def main():
                         icon='comparador\img\document.ico',
                         keep_on_top=False
                         )
-    #Comparacion Flexa vs BOM
+    
+    #............................::::::: Comparacion Flexa vs BOM :::::::...............................
     def flexa_vs_bom():
         comparador(values['-BOM-'],values['-FLEXA-'])
         sg.popup('Comparacion completada con exito!')
@@ -78,7 +76,7 @@ def main():
         if event == 'Salir' or event == sg.WIN_CLOSED:
             break
         
-        if event == 'Comparar':
+        if event == '-COMPARE-':
             try:
                 flexa_vs_bom()
                 reset()
@@ -95,8 +93,19 @@ def main():
                 if edited_file_path:
                     window["-FLEXA-"].update(edited_file_path)
     
-    #Comparacion Nexim vs BOM
-                    
+        #......................................:::::     Comparacion Nexim vs BOM ::::::...............................
+        def nexim_vs_bom():
+            comparacion_nexim(values['-BOM2-'],values['-FLEXA2-'])
+            sg.popup('Comparacion completada con exito!')
+        
+        def reset_nexim():
+            window['-BOM2-'].update('Ruta archivo Syteline')
+            window['-FLEXA2-'].update('Ruta archivo Placement Flexa ')
+        
+        if event == '-COMPARE2-':
+            nexim_vs_bom()
+            reset_nexim()
+                 
     window.close()
     
 if __name__ == '__main__':

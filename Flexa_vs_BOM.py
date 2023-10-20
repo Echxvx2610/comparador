@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 from bom_check import comparador,logger
-#from comparador_pruebas import comparador
+#from comparador_pruebas import comparador,logger
 import os
 import subprocess
 

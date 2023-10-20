@@ -40,7 +40,7 @@ def comparador(ruta_bom,ruta_flexa):
     #bom_filter.to_csv(r'C:\Users\CECHEVARRIAMENDOZA\OneDrive - Brunswick Corporation\Documents\Proyectos_Python\PysimpleGUI\Proyectos\comparador\csv\bom_filter.csv',index=False)
 
     #******************************************************************* PLACEMENT ******************************************************************
-    #carga y conversion de placement flexa a dataframe
+    #Carga y conversion de placement flexa a dataframe
     #nombre_placement = r'C:\Users\CECHEVARRIAMENDOZA\OneDrive - Brunswick Corporation\Documents\Proyectos_Python\PysimpleGUI\Proyectos\comparador\29736-1B.xlsx'
     flexa = pd.read_excel(ruta_flexa, engine='openpyxl')                                                # leemos el archivo excel de flexa
     placement = pd.DataFrame(flexa)                                                                     # convertimos a dataframe
@@ -81,6 +81,36 @@ def comparador(ruta_bom,ruta_flexa):
     ruta_csv = os.path.join(carpeta_nombre_archivo,f"{nombre_excel_sin_extension}.csv")
     comparacion_final = comparacion[comparacion['Comparacion'] != 'En ambos archivos']
     comparacion_final.to_csv(ruta_csv,index=False)                                                                                             # creamos un dataframe que contenga las diferencias y lo guardamos en CSV
+
+def comparacion_nexim(ruta_bom,ruta_nexim):
+    #************************************************************** SYTELINE ******************************************************************
+    #syteline = pd.read_excel(ruta_bom, engine='openpyxl')                                              
+    #bom = pd.DataFrame(syteline)                                                                       
+    #bom.rename(columns={'Designators ':'Reference'},inplace=True)                                       
+    #bom.rename(columns={'Item':'Part Number'},inplace=True)                                            
+    #bom = bom[['Operation','Part Number','Description','Reference']]                                    
+    #bom_op20 = bom[bom['Operation']==20.0]                                                             
+    #bom_op10 = bom[bom['Operation']==10.0]                                                             
+    #bom_filter = bom_op20.merge(bom_op10,how='outer')                                                  
+    ##bom_filter.to_csv(r'C:\Users\CECHEVARRIAMENDOZA\OneDrive - Brunswick Corporation\Documents\Proyectos_Python\PysimpleGUI\Proyectos\comparador\csv\bom.csv',index=False)  
+    #bom_filter['Reference'] = bom_filter['Reference'].str.split()                                      
+    #bom_filter = bom_filter.explode('Reference')                                                      
+    #bom_filter.reset_index(drop=True,inplace=True)                                                    
+    #bom_filter.to_csv(r'comparador\bom_filter_nexim.csv',index=False)
+    #print(bom_filter)
+    
+    #******************************************************************* PLACEMENT ******************************************************************
+    #Carga y conversion de placement nexim a dataframe
+    nexim = pd.read_excel(ruta_nexim, engine='openpyxl')                                              
+    placement = pd.DataFrame(nexim)                                                                    
+    print(placement.columns)
+    placement.rename(columns={'Ref.':'Reference'},inplace=True)
+    placement_nexim = placement[['Part Number','Reference','Skip']]
+    if "NOT" in placement_nexim['Part Number'].values:
+        not_in_bom = placement_nexim[placement_nexim['Part Number']=='NOT']
+        print(not_in_bom)
+        print('Componentes no estan en el BOM')
+        
     
 def table(data_to_display,skipeados):
     # Creamos el diseño de la tabla utilizando PySimpleGUI
