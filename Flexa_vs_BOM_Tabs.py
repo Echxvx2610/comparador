@@ -1,6 +1,6 @@
 import PySimpleGUI as sg    
 #from bom_check import comparador,logger
-from comparador_pruebas import comparador,logger,comparacion_nexim
+from comparador_pruebas import comparador,logger,comparacion_nexim,comparacion_bom
 import os
 import subprocess
 
@@ -18,15 +18,23 @@ def main():
     tab2_layout = [
             [sg.Image(r'comparador\img\LOGO_NAVICO_1_90-black.png',expand_x=False,expand_y=False,enable_events=True,key='-LOGO2-'),sg.Push()],
             [sg.Input(default_text='Ruta archivo Syteline',key='-BOM2-',enable_events=True,size=(65,10),readonly=True,justification='center',font=('Arial',10,'italic')),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar BOM",)],
-            [sg.Input(default_text='Ruta archivo Placement Flexa ',key='-FLEXA2-',enable_events=True,size=(60,10),readonly=True,justification='center',font=('Arial',10,'italic')),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar Placement",)],
+            [sg.Input(default_text='Ruta archivo Placement Nexim ',key='-NEXIM-',enable_events=True,size=(60,10),readonly=True,justification='center',font=('Arial',10,'italic')),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar Placement",)],
             [sg.Button("Abrir y Editar",key='-OPEN2-'),sg.Button('Comparar',key='-COMPARE2-'),sg.Button('Salir')],
+            [sg.Text("Created by: Cristian Echevarría",font=('Arial',6,'italic'))],        
+        ]
+    tab3_layout = [
+            [sg.Image(r'comparador\img\LOGO_NAVICO_1_90-black.png',expand_x=False,expand_y=False,enable_events=True,key='-LOGO2-'),sg.Push()],
+            [sg.Input(default_text='Ruta archivo Syteline (BOM 1)',key='-BOM3-',enable_events=True,size=(65,10),readonly=True,justification='center',font=('Arial',10,'italic')),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar BOM",)],
+            [sg.Input(default_text='Ruta archivo Syteline (BOM 2) ',key='-BOM4-',enable_events=True,size=(65,10),readonly=True,justification='center',font=('Arial',10,'italic')),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar BOM",)],
+            [sg.Button("Abrir y Editar",key='-OPEN3-'),sg.Button('Comparar',key='-COMPARE3-'),sg.Button('Salir')],
             [sg.Text("Created by: Cristian Echevarría",font=('Arial',6,'italic'))],        
         ]   
 
     layout = [
         [sg.TabGroup([
             [sg.Tab("Flexa", tab1_layout,element_justification= 'center'),
-            sg.Tab("Nexim", tab2_layout,element_justification= 'center')]],title_color='White',selected_background_color='red',tab_background_color='black',),
+            sg.Tab("Nexim", tab2_layout,element_justification= 'center'),
+            sg.Tab("BOM", tab3_layout,element_justification= 'center')]],title_color='White',selected_background_color='red',tab_background_color='black',),
         ]]    
     
     window = sg.Window('......::: Flexa vs BOM :::......',
@@ -41,8 +49,7 @@ def main():
     def flexa_vs_bom():
         comparador(values['-BOM-'],values['-FLEXA-'])
         sg.popup('Comparacion completada con exito!')
-            
-            
+        
     def reset():
         window['-BOM-'].update('Ruta archivo Syteline')
         window['-FLEXA-'].update('Ruta archivo Placement Flexa ')
@@ -95,16 +102,43 @@ def main():
     
         #......................................:::::     Comparacion Nexim vs BOM ::::::...............................
         def nexim_vs_bom():
-            comparacion_nexim(values['-BOM2-'],values['-FLEXA2-'])
+            comparacion_nexim(values['-BOM2-'],values['-NEXIM-'])
             sg.popup('Comparacion completada con exito!')
         
         def reset_nexim():
             window['-BOM2-'].update('Ruta archivo Syteline')
-            window['-FLEXA2-'].update('Ruta archivo Placement Flexa ')
+            window['-FLEXA2-'].update('Ruta archivo Placement Nexim ')
         
         if event == '-COMPARE2-':
             nexim_vs_bom()
             reset_nexim()
+        
+         #............................::::::: Comparacion BOM vs BOM :::::::...............................
+        def bom_vs_bom():
+            comparacion_bom(values['-BOM3-'],values['-BOM4-'])
+            sg.popup('Comparacion completada con exito!')
+        
+        def reset_bom():
+            window['-BOM3-'].update('Ruta archivo Syteline (BOM 1)')
+            window['-BOM4-'].update('Ruta archivo Syteline (BOM 2)')
+            
+        if event == '-COMPARE3-':
+            try:
+                bom_vs_bom()
+                reset()
+                csv_folder = r"H:\Ingenieria\SMT\Flexa_vs_BOM"
+                # Abre el explorador de archivos en la ruta específica
+                open_folder_in_explorer(csv_folder)
+            except Exception as e:
+                sg.popup('No se pudo realizar la comparacion,\nIntentelo de nuevo')
+                logger.error(str(e))
+        if event == '-OPEN3-':
+            file_path = values['-BOM4-']
+            if file_path:
+                edited_file_path = open_excel_and_get_path(file_path)
+                if edited_file_path:
+                    window["-BOM4-"].update(edited_file_path)
+    
                  
     window.close()
     

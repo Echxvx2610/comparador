@@ -1,4 +1,5 @@
 import logging
+import os
 
 def setup_logger(log_file):
     logger = logging.getLogger()
@@ -12,12 +13,10 @@ def setup_logger(log_file):
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(formatter)
 
-    # Crear un manejador para imprimir los registros en la consola
-    console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.INFO)
-    console_handler.setFormatter(formatter)
-
-    # Agregar los manejadores al logger
+    # Agregar el manejador al logger
     logger.addHandler(file_handler)
-    logger.addHandler(console_handler)
+
+    # Cambiar los permisos del archivo de registro para que sea de solo lectura para otros usuarios
+    os.chmod(log_file, 0o644)  # Esto permite escritura por el propietario y lectura por otros
+
     return logger

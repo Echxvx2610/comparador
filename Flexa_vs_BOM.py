@@ -70,8 +70,6 @@ def main():
                 csv_folder = r"H:\Ingenieria\SMT\Flexa_vs_BOM"
                 # Abre el explorador de archivos en la ruta específica
                 open_folder_in_explorer(csv_folder)
-            #  except Exception as e:
-            #     sg.popup_error(f"Error: {str(e)}")
              except Exception as e:
                 sg.popup('No se pudo realizar la comparacion,\nIntentelo de nuevo')
                 logger.error(str(e))
