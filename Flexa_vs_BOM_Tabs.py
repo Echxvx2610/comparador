@@ -1,6 +1,6 @@
 import PySimpleGUI as sg    
-#from bom_check import comparador,logger
-from comparador_pruebas import comparador,logger,comparacion_nexim,comparacion_bom
+from bom_check import comparador,logger,comparacion_nexim,comparacion_bom
+#from comparador_pruebas import comparador,logger,comparacion_nexim,comparacion_bom
 import os
 import subprocess
 
@@ -42,7 +42,8 @@ def main():
                         no_titlebar=False,
                         element_justification='center',
                         icon='comparador\img\document.ico',
-                        keep_on_top=False
+                        keep_on_top=False,
+                        resizable=False,
                         )
     
     #............................::::::: Comparacion Flexa vs BOM :::::::...............................
@@ -107,11 +108,18 @@ def main():
         
         def reset_nexim():
             window['-BOM2-'].update('Ruta archivo Syteline')
-            window['-FLEXA2-'].update('Ruta archivo Placement Nexim ')
-        
+            window['-NEXIM-'].update('Ruta archivo Placement Nexim ')
+            
         if event == '-COMPARE2-':
-            nexim_vs_bom()
-            reset_nexim()
+            try:
+                nexim_vs_bom()
+                reset_nexim()
+                csv_folder_nexim = r"H:\Ingenieria\SMT\Flexa_vs_BOM\Nexim"
+                # Abre el explorador de archivos en la ruta unica
+                open_folder_in_explorer(csv_folder_nexim)
+            except Exception as e:
+                sg.popup('No se pudo realizar la comparacion,\nIntentelo de nuevo')
+                logger.error(str(e))
         
          #............................::::::: Comparacion BOM vs BOM :::::::...............................
         def bom_vs_bom():
@@ -119,8 +127,8 @@ def main():
             sg.popup('Comparacion completada con exito!')
         
         def reset_bom():
-            window['-BOM3-'].update('Ruta archivo Syteline (BOM 1)')
-            window['-BOM4-'].update('Ruta archivo Syteline (BOM 2)')
+            window['-BOM3-'].update('Ruta archivo Syteline (BOM Izq)')
+            window['-BOM4-'].update('Ruta archivo Syteline (BOM Der)')
             
         if event == '-COMPARE3-':
             try:
