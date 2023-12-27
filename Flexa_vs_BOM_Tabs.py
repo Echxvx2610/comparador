@@ -1,6 +1,6 @@
 import PySimpleGUI as sg    
-from bom_check import comparador,logger,comparacion_nexim,comparacion_bom
-#from comparador_pruebas import comparador,logger,comparacion_nexim,comparacion_bom
+#from bom_check import comparador,logger,comparacion_nexim,comparacion_bom
+from comparador_pruebas import comparador,logger,comparacion_nexim,comparacion_bom
 import os
 import subprocess
 
@@ -26,7 +26,7 @@ def main():
             [sg.Image(r'comparador\img\LOGO_NAVICO_1_90-black.png',expand_x=False,expand_y=False,enable_events=True,key='-LOGO2-'),sg.Push()],
             [sg.Input(default_text='Ruta archivo Syteline (BOM 1)',key='-BOM3-',enable_events=True,size=(65,10),readonly=True,justification='center',font=('Arial',10,'italic')),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar BOM",)],
             [sg.Input(default_text='Ruta archivo Syteline (BOM 2) ',key='-BOM4-',enable_events=True,size=(65,10),readonly=True,justification='center',font=('Arial',10,'italic')),sg.FileBrowse(file_types=(("Excel files", "*.xlsx"), ("All files", "*.*")),button_text="Cargar BOM",)],
-            [sg.Button("Abrir y Editar",key='-OPEN3-'),sg.Button('Comparar',key='-COMPARE3-'),sg.Button('Salir')],
+            [sg.Button('Comparar',key='-COMPARE3-'),sg.Button('Salir')],
             [sg.Text("Created by: Cristian Echevarría",font=('Arial',6,'italic'))],        
         ]   
 
@@ -120,6 +120,12 @@ def main():
             except Exception as e:
                 sg.popup('No se pudo realizar la comparacion,\nIntentelo de nuevo')
                 logger.error(str(e))
+        if event == '-OPEN2-':
+            file_path = values['-NEXIM-']
+            if file_path:
+                edited_file_path = open_excel_and_get_path(file_path)
+                if edited_file_path:
+                    window["-NEXIM-"].update(edited_file_path)
         
          #............................::::::: Comparacion BOM vs BOM :::::::...............................
         def bom_vs_bom():
@@ -140,12 +146,6 @@ def main():
             except Exception as e:
                 sg.popup('No se pudo realizar la comparacion,\nIntentelo de nuevo')
                 logger.error(str(e))
-        if event == '-OPEN3-':
-            file_path = values['-BOM4-']
-            if file_path:
-                edited_file_path = open_excel_and_get_path(file_path)
-                if edited_file_path:
-                    window["-BOM4-"].update(edited_file_path)
     
                  
     window.close()

@@ -211,3 +211,89 @@
 2023-12-22 16:14:37,654 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/32194-1G/SV9_007 (1).xlsx y H:/Temporal/Echevarria/32194-1G/32194-1g.xlsx
 2023-12-22 16:14:39,196 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\Nexim\32194-1g\32194-1g.csv con las diferencias entre H:/Temporal/Echevarria/32194-1G/SV9_007 (1).xlsx y H:/Temporal/Echevarria/32194-1G/32194-1g.xlsx
 2023-12-22 16:14:39,197 - INFO - ----------------------------------------------------------------------------------
+2023-12-26 14:13:33,135 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/9981-2C/9981-2C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/9981-2C/SV9_007 (7).xlsx
+2023-12-26 14:13:33,137 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/9981-2C/9981-2C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/9981-2C/SV9_007 (7).xlsx
+2023-12-26 14:13:33,148 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\9981-2C\9981-2C.csv con las diferencias de la comparacion
+2023-12-26 14:13:33,148 - INFO - --------------------------------------------------------------
+
+2023-12-27 07:49:20,644 - ERROR - "['Operation', 'Description', 'Reference'] not in index"
+2023-12-27 07:49:30,612 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/9981-2C/9981-2C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/9981-2C/SV9_007 (7).xlsx
+2023-12-27 07:49:30,612 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/9981-2C/9981-2C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/9981-2C/SV9_007 (7).xlsx
+2023-12-27 07:49:30,646 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\9981-2C\9981-2C.csv con las diferencias de la comparacion
+2023-12-27 07:49:30,647 - INFO - --------------------------------------------------------------
+
+2023-12-27 07:57:10,545 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/9981-2C/9981-2C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/9981-2C/SV9_007 (7).xlsx
+2023-12-27 07:57:10,548 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/9981-2C/9981-2C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/9981-2C/SV9_007 (7).xlsx
+2023-12-27 07:57:10,587 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\9981-2C\9981-2C.csv con las diferencias de la comparacion
+2023-12-27 07:57:10,588 - INFO - --------------------------------------------------------------
+
+2023-12-27 07:57:52,096 - INFO - Se encontraron 18 componentes con el no.parte ['014-0003-70' '014-0015-35' '014-0016-34' '015-0012-08' '015-0012-08'
+ '015-0031-07' '015-0031-07' '015-0031-07' '015-0031-07' '015-0031-07'
+ '015-0031-07' '015-0031-07' '015-0050-07' '015-0050-07' '015-0050-07'
+ '015-0089-01X' '016-0009-06' '016-0009-06'] y referencia ['U16' 'U10' 'U33' 'Q25' 'Q26' 'Q10' 'Q28' 'Q2' 'Q5' 'Q6' 'Q7' 'Q8' 'Q1'
+ 'Q3' 'Q9' 'Q13' 'D11' 'D8']
+2023-12-27 07:58:07,940 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/32194-1G/32194-1G.xlsx
+2023-12-27 07:58:07,951 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/32194-1G/SV9_007 (1).xlsx y H:/Temporal/Echevarria/pruebas_comparador/32194-1G/32194-1G.xlsx
+2023-12-27 07:58:08,832 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\Nexim\32194-1G\32194-1G.csv con las diferencias entre H:/Temporal/Echevarria/pruebas_comparador/32194-1G/SV9_007 (1).xlsx y H:/Temporal/Echevarria/pruebas_comparador/32194-1G/32194-1G.xlsx
+2023-12-27 07:58:08,832 - INFO - ----------------------------------------------------------------------------------
+2023-12-27 07:59:57,792 - INFO - Se encontraron 18 componentes con el no.parte ['014-0003-70' '014-0015-35' '014-0016-34' '015-0012-08' '015-0012-08'
+ '015-0031-07' '015-0031-07' '015-0031-07' '015-0031-07' '015-0031-07'
+ '015-0031-07' '015-0031-07' '015-0050-07' '015-0050-07' '015-0050-07'
+ '015-0089-01X' '016-0009-06' '016-0009-06'] y referencia ['U16' 'U10' 'U33' 'Q25' 'Q26' 'Q10' 'Q28' 'Q2' 'Q5' 'Q6' 'Q7' 'Q8' 'Q1'
+ 'Q3' 'Q9' 'Q13' 'D11' 'D8']
+2023-12-27 07:59:59,791 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/32194-1G/32194-1G.xlsx
+2023-12-27 08:00:00,736 - ERROR - The truth value of a DataFrame is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().
+2023-12-27 08:01:41,696 - INFO - Se encontraron 18 componentes con el no.parte ['014-0003-70' '014-0015-35' '014-0016-34' '015-0012-08' '015-0012-08'
+ '015-0031-07' '015-0031-07' '015-0031-07' '015-0031-07' '015-0031-07'
+ '015-0031-07' '015-0031-07' '015-0050-07' '015-0050-07' '015-0050-07'
+ '015-0089-01X' '016-0009-06' '016-0009-06'] y referencia ['U16' 'U10' 'U33' 'Q25' 'Q26' 'Q10' 'Q28' 'Q2' 'Q5' 'Q6' 'Q7' 'Q8' 'Q1'
+ 'Q3' 'Q9' 'Q13' 'D11' 'D8']
+2023-12-27 08:01:43,303 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/32194-1G/32194-1G.xlsx
+2023-12-27 08:01:44,078 - ERROR - Cannot perform 'ror_' with a dtyped [bool] array and scalar of type [bool]
+2023-12-27 08:02:57,797 - INFO - Se encontraron 18 componentes con el no.parte ['014-0003-70' '014-0015-35' '014-0016-34' '015-0012-08' '015-0012-08'
+ '015-0031-07' '015-0031-07' '015-0031-07' '015-0031-07' '015-0031-07'
+ '015-0031-07' '015-0031-07' '015-0050-07' '015-0050-07' '015-0050-07'
+ '015-0089-01X' '016-0009-06' '016-0009-06'] y referencia ['U16' 'U10' 'U33' 'Q25' 'Q26' 'Q10' 'Q28' 'Q2' 'Q5' 'Q6' 'Q7' 'Q8' 'Q1'
+ 'Q3' 'Q9' 'Q13' 'D11' 'D8']
+2023-12-27 08:02:59,835 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/32194-1G/32194-1G.xlsx
+2023-12-27 08:02:59,848 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/32194-1G/SV9_007 (1).xlsx y H:/Temporal/Echevarria/pruebas_comparador/32194-1G/32194-1G.xlsx
+2023-12-27 08:03:00,701 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\Nexim\32194-1G\32194-1G.csv con las diferencias entre H:/Temporal/Echevarria/pruebas_comparador/32194-1G/SV9_007 (1).xlsx y H:/Temporal/Echevarria/pruebas_comparador/32194-1G/32194-1G.xlsx
+2023-12-27 08:03:00,701 - INFO - ----------------------------------------------------------------------------------
+2023-12-27 08:03:49,219 - INFO - Se encontraron 18 componentes con el no.parte ['014-0003-70' '014-0015-35' '014-0016-34' '015-0012-08' '015-0012-08'
+ '015-0031-07' '015-0031-07' '015-0031-07' '015-0031-07' '015-0031-07'
+ '015-0031-07' '015-0031-07' '015-0050-07' '015-0050-07' '015-0050-07'
+ '015-0089-01X' '016-0009-06' '016-0009-06'] y referencia ['U16' 'U10' 'U33' 'Q25' 'Q26' 'Q10' 'Q28' 'Q2' 'Q5' 'Q6' 'Q7' 'Q8' 'Q1'
+ 'Q3' 'Q9' 'Q13' 'D11' 'D8']
+2023-12-27 08:03:50,640 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/32194-1G/32194-1G.xlsx
+2023-12-27 08:03:51,324 - ERROR - The truth value of a Series is ambiguous. Use a.empty, a.bool(), a.item(), a.any() or a.all().
+2023-12-27 08:06:06,186 - INFO - Se encontraron 18 componentes con el no.parte ['014-0003-70' '014-0015-35' '014-0016-34' '015-0012-08' '015-0012-08'
+ '015-0031-07' '015-0031-07' '015-0031-07' '015-0031-07' '015-0031-07'
+ '015-0031-07' '015-0031-07' '015-0050-07' '015-0050-07' '015-0050-07'
+ '015-0089-01X' '016-0009-06' '016-0009-06'] y referencia ['U16' 'U10' 'U33' 'Q25' 'Q26' 'Q10' 'Q28' 'Q2' 'Q5' 'Q6' 'Q7' 'Q8' 'Q1'
+ 'Q3' 'Q9' 'Q13' 'D11' 'D8']
+2023-12-27 08:06:08,322 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/32194-1G/32194-1G.xlsx
+2023-12-27 08:06:08,334 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/32194-1G/SV9_007 (1).xlsx y H:/Temporal/Echevarria/pruebas_comparador/32194-1G/32194-1G.xlsx
+2023-12-27 08:06:09,162 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\Nexim\32194-1G\32194-1G.csv con las diferencias entre H:/Temporal/Echevarria/pruebas_comparador/32194-1G/SV9_007 (1).xlsx y H:/Temporal/Echevarria/pruebas_comparador/32194-1G/32194-1G.xlsx
+2023-12-27 08:06:09,162 - INFO - ----------------------------------------------------------------------------------
+2023-12-27 08:20:00,647 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/9981-2C/9981-2C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/9981-2C/SV9_007 (7).xlsx
+2023-12-27 08:20:01,463 - INFO - Se encontraron 4 componentes con el no.parte ['106-0670-02' '106-0547-02' '106-0239-02' '106-0670-02'] y referencia ['C106' 'C109' 'C111' 'C112']
+2023-12-27 08:20:03,109 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/9981-2C/9981-2C.xlsx
+2023-12-27 08:20:03,700 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/9981-2C/9981-2C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/9981-2C/SV9_007 (7).xlsx
+2023-12-27 08:20:03,701 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/9981-2C/9981-2C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/9981-2C/SV9_007 (7).xlsx
+2023-12-27 08:20:03,710 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\9981-2C\9981-2C.csv con las diferencias de la comparacion
+2023-12-27 08:20:03,711 - INFO - --------------------------------------------------------------
+
+2023-12-27 09:23:07,320 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/9981-2C/9981-2C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/9981-2C/SV9_007 (7).xlsx
+2023-12-27 09:23:07,321 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/9981-2C/9981-2C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/9981-2C/SV9_007 (7).xlsx
+2023-12-27 09:23:07,332 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\9981-2C\9981-2C.csv con las diferencias de la comparacion
+2023-12-27 09:23:07,332 - INFO - --------------------------------------------------------------
+
+2023-12-27 09:23:39,259 - INFO - Se encontraron 18 componentes con el no.parte ['014-0003-70' '014-0015-35' '014-0016-34' '015-0012-08' '015-0012-08'
+ '015-0031-07' '015-0031-07' '015-0031-07' '015-0031-07' '015-0031-07'
+ '015-0031-07' '015-0031-07' '015-0050-07' '015-0050-07' '015-0050-07'
+ '015-0089-01X' '016-0009-06' '016-0009-06'] y referencia ['U16' 'U10' 'U33' 'Q25' 'Q26' 'Q10' 'Q28' 'Q2' 'Q5' 'Q6' 'Q7' 'Q8' 'Q1'
+ 'Q3' 'Q9' 'Q13' 'D11' 'D8']
+2023-12-27 09:23:41,541 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/32194-1G/32194-1G.xlsx
+2023-12-27 09:23:41,551 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/32194-1G/SV9_007 (1).xlsx y H:/Temporal/Echevarria/pruebas_comparador/32194-1G/32194-1G.xlsx
+2023-12-27 09:23:42,196 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\Nexim\32194-1G\32194-1G.csv con las diferencias entre H:/Temporal/Echevarria/pruebas_comparador/32194-1G/SV9_007 (1).xlsx y H:/Temporal/Echevarria/pruebas_comparador/32194-1G/32194-1G.xlsx
+2023-12-27 09:23:42,196 - INFO - ----------------------------------------------------------------------------------

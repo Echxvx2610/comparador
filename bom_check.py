@@ -78,7 +78,8 @@ def comparador(ruta_bom,ruta_flexa):
     })
     only_bom = comparacion[comparacion['Comparacion'] == 'left_only']
     only_placement = comparacion[comparacion['Comparacion'] == 'right_only']
-    comparacion_final = comparacion[comparacion['Comparacion'] != 'En ambos archivos']
+    # comparacion final sera las diferencias de ambos archivos y ademas los componentes que lleven yes en skip
+    comparacion_final = comparacion[(comparacion['Comparacion'] != 'En ambos archivos') | ((comparacion['Skip'] == 'Yes') | (comparacion['Skip'].isna()))]
     if comparacion_final.empty:
         sg.popup('No se encontraron diferencias :)')
         logger.info(f"No se encontraron diferencias entre {ruta_flexa} y {ruta_bom}")
@@ -93,12 +94,14 @@ def comparador(ruta_bom,ruta_flexa):
         os.makedirs(carpeta_nombre_archivo, exist_ok=True)
         ruta_csv = os.path.join(carpeta_nombre_archivo,f"{nombre_excel_sin_extension}.csv")
         # creamos un dataframe que contenga las diferencias y lo guardamos en CSV
-        comparacion_final = comparacion[comparacion['Comparacion'] != 'En ambos archivos']
+        #funcional --> comparacion_final = comparacion[comparacion['Comparacion'] != 'En ambos archivos']
+        
         # retiramos la fila completa si se encuentra un No.Parte en la columna No.Parte
         comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('017-')]
         #comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('014-')]  // esto es un numero de parte!!
         comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('051-')]
         comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('140-')]
+        
         # generamos el CSV
         comparacion_final.to_csv(ruta_csv,index=False)
         logger.info(f'Se genero el CSV {ruta_csv} con las diferencias de la comparacion')
@@ -158,8 +161,9 @@ def comparacion_nexim(ruta_bom,ruta_nexim):
         "right_only": "En Nexim",
         "both": "En ambos archivos"
     })
-    comparacion_final = comparacion[comparacion['Comparacion']!='En ambos archivos']
-    #print(comparacion_final)
+    # comparacion final sera las diferencias de ambos archivos y ademas los componentes que lleven yes en skip
+    comparacion_final = comparacion[(comparacion['Comparacion'] != 'En ambos archivos') | ((comparacion['Skip'] == 'Yes') | (comparacion['Skip'].isna()))]
+    #comparacion_final = comparacion[comparacion['Comparacion']!='En ambos archivos']
     if comparacion_final.empty:
         logger.info(f"No se encontraron diferencias en comparacion con el archivo {ruta_bom} y {ruta_nexim}")
         sg.popup('No se encontraron diferencias en el archivo! :)')
@@ -219,9 +223,9 @@ def comparacion_bom(ruta_bom,ruta_bom2):
     comparacion_final = comparacion[comparacion['Comparacion']!='En ambos archivos']
     # si no hay diferencias solo alerta un Pop up completado con exito!, si hay diferencias crea el archivo csv
     if comparacion_final.empty:
-        sg.popup('No hay diferencias en el BOM :)')
+        sg.popup('No hay diferencias entre los BOM :)')
     else:
-        sg.popup('Se han encontrado diferencias en el BOM :(')
+        sg.popup('Se han encontrado diferencias entre los BOM :(')
         ## Comparacion final sera un dataframe que contenga los datos que sean diferentes en ambos archivos pero no es necesario mostrar los no.part que contenga NOT IN BOM
         nombre_excel_sin_extension = os.path.splitext(os.path.basename(ruta_bom))[0]
         carpeta_nombre_archivo = r"H:\Ingenieria\SMT\Flexa_vs_BOM\BOM\{nombre_excel_sin_extension}".format(nombre_excel_sin_extension=nombre_excel_sin_extension)
