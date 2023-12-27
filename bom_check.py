@@ -7,8 +7,8 @@ import os
 import logger
 
 #configuracion de logger
-#logger = logger.setup_logger(r'H:\Ingenieria\SMT\Flexa_vs_BOM\comp.log')
-logger = logger.setup_logger(r'comparador\comp.log')
+logger = logger.setup_logger(r'H:\Ingenieria\SMT\Flexa_vs_BOM\comp.log')
+#logger = logger.setup_logger(r'comparador\comp.log')
 
 
 #......................:::: CONFIGURACION DEL DATAFRAME ::::..................
@@ -80,12 +80,13 @@ def comparador(ruta_bom,ruta_flexa):
     only_placement = comparacion[comparacion['Comparacion'] == 'right_only']
     # comparacion final sera las diferencias de ambos archivos y ademas los componentes que lleven yes en skip
     comparacion_final = comparacion[(comparacion['Comparacion'] != 'En ambos archivos') | ((comparacion['Skip'] == 'Yes') | (comparacion['Skip'].isna()))]
+    
     if comparacion_final.empty:
+        logger.info(f"No se encontraron diferencias en comparacion con el archivo {ruta_bom} y {ruta_flexa}")
         sg.popup('No se encontraron diferencias :)')
-        logger.info(f"No se encontraron diferencias entre {ruta_flexa} y {ruta_bom}")
         exit()
     else:
-        sg.popup('Se encontraron diferencias :(')
+        sg.popup('Se encontraron diferencias :O')
         logger.info(f"Se encontraron diferencias entre {ruta_flexa} y {ruta_bom}")
         # creamos la carpeta y el csv de la comparacion
         nombre_excel_sin_extension = os.path.splitext(os.path.basename(ruta_flexa))[0]                                                             # creamos el nombre del archivo sin extension
@@ -166,14 +167,19 @@ def comparacion_nexim(ruta_bom,ruta_nexim):
     #comparacion_final = comparacion[comparacion['Comparacion']!='En ambos archivos']
     if comparacion_final.empty:
         logger.info(f"No se encontraron diferencias en comparacion con el archivo {ruta_bom} y {ruta_nexim}")
-        sg.popup('No se encontraron diferencias en el archivo! :)')
+        sg.popup('No se encontraron diferencias :)')
     else:
         logger.info(f"Se encontraron diferencias entre {ruta_bom} y {ruta_nexim}")
+        sg.popup('Se encontraron diferencias :O')
         nombre_excel_sin_extension = os.path.splitext(os.path.basename(ruta_nexim))[0]
         carpeta_nombre_archivo = r"H:\Ingenieria\SMT\Flexa_vs_BOM\Nexim\{nombre_excel_sin_extension}".format(nombre_excel_sin_extension=nombre_excel_sin_extension)
         os.makedirs(carpeta_nombre_archivo, exist_ok=True)
         ruta_csv = os.path.join(carpeta_nombre_archivo,f'{nombre_excel_sin_extension}.csv')
-        sg.popup('Se encontraron diferencias en el archivo! :(')            
+        # retiramos la fila completa si se encuentra un No.Parte en la columna No.Parte
+        comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('017-')]
+        #comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('014-')]  // esto es un numero de parte!!
+        comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('051-')]
+        comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('140-')]            
         comparacion_final.to_csv(ruta_csv,index=False)
         logger.info(f"Se genero el CSV {ruta_csv} con las diferencias entre {ruta_bom} y {ruta_nexim}")
         logger.info("----------------------------------------------------------------------------------")
@@ -225,7 +231,7 @@ def comparacion_bom(ruta_bom,ruta_bom2):
     if comparacion_final.empty:
         sg.popup('No hay diferencias entre los BOM :)')
     else:
-        sg.popup('Se han encontrado diferencias entre los BOM :(')
+        sg.popup('Se han encontrado diferencias entre los BOM :O')
         ## Comparacion final sera un dataframe que contenga los datos que sean diferentes en ambos archivos pero no es necesario mostrar los no.part que contenga NOT IN BOM
         nombre_excel_sin_extension = os.path.splitext(os.path.basename(ruta_bom))[0]
         carpeta_nombre_archivo = r"H:\Ingenieria\SMT\Flexa_vs_BOM\BOM\{nombre_excel_sin_extension}".format(nombre_excel_sin_extension=nombre_excel_sin_extension)
