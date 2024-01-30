@@ -1,6 +1,6 @@
 import PySimpleGUI as sg    
-from bom_check import comparador,logger,comparacion_nexim,comparacion_bom
-#from comparador_pruebas import comparador,logger,comparacion_nexim,comparacion_bom
+#from bom_check import comparador,logger,comparacion_nexim,comparacion_bom
+from comparador_pruebas import comparador,logger,comparacion_nexim,comparacion_bom
 import os
 import subprocess
 
@@ -48,8 +48,8 @@ def main():
     
     #............................::::::: Comparacion Flexa vs BOM :::::::...............................
     def flexa_vs_bom():
-        comparador(values['-BOM-'],values['-FLEXA-'])
-        sg.popup('Comparacion completada con exito!')
+        return comparador(values['-BOM-'],values['-FLEXA-'])
+        
         
     def reset():
         window['-BOM-'].update('Ruta archivo Syteline')
@@ -84,13 +84,15 @@ def main():
         
         if event == '-SALIR-' or event == '-SALIR2-' or event == '-SALIR3-' or event == sg.WIN_CLOSED:
             break
+        
         if event == '-COMPARE-':
             try:
-                flexa_vs_bom()
+                differences_found = flexa_vs_bom()
                 reset()
-                csv_folder = r"H:\Ingenieria\SMT\Flexa_vs_BOM"
-                # Abre el explorador de archivos en la ruta específica
-                open_folder_in_explorer(csv_folder)
+                if differences_found is True:
+                    csv_folder = r"H:\Ingenieria\SMT\Flexa_vs_BOM"
+                    # Abre el explorador de archivos en la ruta específica
+                    open_folder_in_explorer(csv_folder)
             except Exception as e:
                 sg.popup('No se pudo realizar la comparacion,\nIntentelo de nuevo')
                 logger.error(str(e))
@@ -104,8 +106,8 @@ def main():
     
         #......................................:::::     Comparacion Nexim vs BOM ::::::...............................
         def nexim_vs_bom():
-            comparacion_nexim(values['-BOM2-'],values['-NEXIM-'])
-            sg.popup('Comparacion completada con exito!')
+            return comparacion_nexim(values['-BOM2-'],values['-NEXIM-'])
+            
         
         def reset_nexim():
             window['-BOM2-'].update('Ruta archivo Syteline')
@@ -113,14 +115,16 @@ def main():
             
         if event == '-COMPARE2-':
             try:
-                nexim_vs_bom()
+                differences_found = nexim_vs_bom()
                 reset_nexim()
-                csv_folder_nexim = r"H:\Ingenieria\SMT\Flexa_vs_BOM\Nexim"
-                # Abre el explorador de archivos en la ruta unica
-                open_folder_in_explorer(csv_folder_nexim)
+                if differences_found is True:
+                    csv_folder_nexim = r"H:\Ingenieria\SMT\Flexa_vs_BOM\Nexim"
+                    # Abre el explorador de archivos en la ruta unica
+                    open_folder_in_explorer(csv_folder_nexim)
             except Exception as e:
                 sg.popup('No se pudo realizar la comparacion,\nIntentelo de nuevo')
                 logger.error(str(e))
+                
         if event == '-OPEN2-':
             file_path = values['-NEXIM-']
             if file_path:
@@ -130,8 +134,8 @@ def main():
         
          #............................::::::: Comparacion BOM vs BOM :::::::...............................
         def bom_vs_bom():
-            comparacion_bom(values['-BOM3-'],values['-BOM4-'])
-            sg.popup('Comparacion completada con exito!')
+            return comparacion_bom(values['-BOM3-'],values['-BOM4-'])
+            
         
         def reset_bom():
             window['-BOM3-'].update('Ruta archivo Syteline (BOM Izq)')
@@ -139,11 +143,12 @@ def main():
             
         if event == '-COMPARE3-':
             try:
-                bom_vs_bom()
+                differences_found = bom_vs_bom()
                 reset_bom()
-                csv_folder = r"H:\Ingenieria\SMT\Flexa_vs_BOM\BOM"
-                # Abre el explorador de archivos en la ruta específica
-                open_folder_in_explorer(csv_folder)
+                if differences_found is True:    
+                    csv_folder = r"H:\Ingenieria\SMT\Flexa_vs_BOM\BOM"
+                    # Abre el explorador de archivos en la ruta específica
+                    open_folder_in_explorer(csv_folder)
             except Exception as e:
                 sg.popup('No se pudo realizar la comparacion,\nIntentelo de nuevo')
                 logger.error(str(e))

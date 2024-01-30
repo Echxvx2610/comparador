@@ -46,6 +46,7 @@ def comparador(ruta_bom,ruta_flexa):
     flexa = pd.read_excel(ruta_flexa, engine='openpyxl')                                                # leemos el archivo excel de flexa
     placement = pd.DataFrame(flexa)                                                                     # convertimos a dataframe
     placement.rename(columns={'Ref.':'Reference'},inplace=True)                                         # Renombramos columna(Ref. a Reference)
+    logger.info(f"Comienza la comparacion con el archivo {ruta_flexa} vs {ruta_bom}")
     placement = placement[['Board','Part Number','Reference','Skip']]                                   # Seleccionamos las columnas deseadas(Board,Part Number,Reference,Skip)
     if "Yes" in placement['Skip'].values:                                                               # Si se encuentra skip en el archivo
         #print(placement['Skip'].values == "Yes")                                                       # alertamos al usuario 
@@ -133,7 +134,7 @@ def comparacion_nexim(ruta_bom,ruta_nexim):
     placement = pd.DataFrame(nexim)                                                                    
     placement.rename(columns={'Ref.':'Reference'},inplace=True)
     placement = placement[['Part Number','Reference','Skip']]
-    
+    logger.info(f"Comienza la comparacion con el archivo {ruta_nexim} vs {ruta_bom}")
     #Revisamos si hay yes en Skip
     placement = placement[~placement['Part Number'].str.startswith("NOT")]
     if "Yes" in placement['Skip'].values:
@@ -216,6 +217,7 @@ def comparacion_bom(ruta_bom,ruta_bom2):
     bom2_filter.reset_index(drop=True,inplace=True)                                                     # reseta el indice,debido que al desempaquetar agregamos mas elemenetos al dataframe
     #bom2_filter.to_csv(r'comparador\csv\bom2_filter.csv',index=False)
     # ******************************************************************* COMPARACION ******************************************************************
+    logger.info(f"Comienza la comparacion con el archivo {ruta_bom} vs {ruta_bom2}")
     comparacion = bom_filter.merge(bom2_filter,how='outer',suffixes = ('_izq', '_der'),indicator=True)
     comparacion.rename(columns={'_merge':'Comparacion'},inplace=True)
     comparacion['Comparacion'] = comparacion['Comparacion'].replace({
@@ -241,6 +243,14 @@ def comparacion_bom(ruta_bom,ruta_bom2):
         comparacion_final.to_csv(ruta_csv,index=False)
         logger.info(f'Se realizo la comparacion entre los BOM y se genero el CSV {ruta_csv}')
         logger.info('--------------------------------------------------------------\n')   
+
+def validar_panel():
+    # funcion para validar panelizado de mas de un board en placement
+    ruta_placement = r'H:\Temporal\Echevarria\pruebas_comparador\20642-1C\20642-1C.xlsx'
+    placement = pd.read_excel(ruta_placement, engine='openpyxl')
+    
+    
+    
     
 def table(data_to_display,skipeados):
     # Creamos el diseño de la tabla utilizando PySimpleGUI
