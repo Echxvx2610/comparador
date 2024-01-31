@@ -4,6 +4,7 @@ from comparador_pruebas import comparador,logger,comparacion_nexim,comparacion_b
 import os
 import subprocess
 
+
 #Implementacion de un layout Tab para duplicar la aplicacion y comparar con BOM para Nexim
 def main():
     sg.theme("DefaultNoMoreNagging")
@@ -87,12 +88,14 @@ def main():
         
         if event == '-COMPARE-':
             try:
-                differences_found = flexa_vs_bom()
+                differences_found, csv_path = flexa_vs_bom()
                 reset()
                 if differences_found is True:
-                    csv_folder = r"H:\Ingenieria\SMT\Flexa_vs_BOM"
                     # Abre el explorador de archivos en la ruta específica
-                    open_folder_in_explorer(csv_folder)
+                    #csv_folder = r"H:\Ingenieria\SMT\Flexa_vs_BOM"
+                    #open_folder_in_explorer(csv_folder)
+                    
+                    os.startfile(csv_path)
             except Exception as e:
                 sg.popup('No se pudo realizar la comparacion,\nIntentelo de nuevo')
                 logger.error(str(e))
@@ -158,3 +161,6 @@ def main():
     
 if __name__ == '__main__':
     main()
+    
+
+

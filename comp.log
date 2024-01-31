@@ -527,3 +527,138 @@
 2024-01-30 11:33:21,373 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\20642-1C\20642-1C.csv con las diferencias de la comparacion
 2024-01-30 11:33:21,374 - INFO - --------------------------------------------------------------
 
+2024-01-30 15:12:45,617 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-30 15:12:45,620 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-30 15:12:46,732 - INFO - Se encontraron 3 componentes con Skip, no.parte ['016-0176-01' '027-0059-00' '114-0001-02'] y referencia ['D1' 'L1' 'R3']
+2024-01-30 15:12:54,627 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-30 15:12:58,052 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-30 15:12:58,053 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-30 15:12:58,065 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\20642-1C\20642-1C.csv con las diferencias de la comparacion
+2024-01-30 15:12:58,065 - INFO - --------------------------------------------------------------
+
+2024-01-30 15:13:17,289 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-30 15:13:17,289 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-30 15:13:18,053 - INFO - Se encontraron 3 componentes con Skip, no.parte ['016-0176-01' '027-0059-00' '114-0001-02'] y referencia ['D1' 'L1' 'R3']
+2024-01-30 15:13:20,340 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-30 15:13:21,393 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-30 15:13:21,394 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-30 15:13:21,403 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\20642-1C\20642-1C.csv con las diferencias de la comparacion
+2024-01-30 15:13:21,404 - INFO - --------------------------------------------------------------
+
+2024-01-31 09:20:56,163 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:20:56,180 - INFO - No se encontraron diferencias en comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 09:22:06,937 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:22:09,370 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:22:09,370 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:22:09,380 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\20642-1C\20642-1C.csv con las diferencias de la comparacion
+2024-01-31 09:22:09,381 - INFO - --------------------------------------------------------------
+
+2024-01-31 09:25:16,029 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:25:19,110 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:25:19,111 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:25:19,123 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\20642-1C\20642-1C.csv con las diferencias de la comparacion
+2024-01-31 09:25:19,123 - INFO - --------------------------------------------------------------
+
+2024-01-31 09:25:56,249 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:27:53,543 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:27:53,545 - INFO - Se encontraron componentes sin asignar en el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 09:27:54,565 - INFO - Se encontraron 0 componentes sin asignar, no.parte [] y referencia []
+2024-01-31 09:27:57,991 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 09:27:59,419 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:27:59,419 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:27:59,429 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\20642-1C\20642-1C.csv con las diferencias de la comparacion
+2024-01-31 09:27:59,430 - INFO - --------------------------------------------------------------
+
+2024-01-31 09:28:30,310 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:28:30,311 - INFO - Se encontraron componentes sin asignar en el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 09:28:31,657 - INFO - Se encontraron 3 componentes sin asignar, no.parte ['114-0001-02' '114-0001-02' '014-20372-15'] y referencia ['R3' 'R4' 'U1']
+2024-01-31 09:28:36,718 - INFO - No se realizo la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 09:33:47,659 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:33:47,662 - INFO - Se encontraron componentes sin asignar en el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 09:33:49,813 - INFO - Se encontraron 3 componentes sin asignar, no.parte ['114-0001-02' '114-0001-02' '014-20372-15'] y referencia ['R3' 'R4' 'U1']
+2024-01-31 09:33:52,217 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 09:33:53,312 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:33:53,313 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:33:53,322 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\20642-1C\20642-1C.csv con las diferencias de la comparacion
+2024-01-31 09:33:53,322 - INFO - --------------------------------------------------------------
+
+2024-01-31 09:35:02,691 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:35:02,702 - INFO - No se encontraron diferencias en comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 09:35:27,066 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:35:28,837 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:35:28,838 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:35:28,846 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\20642-1C\20642-1C.csv con las diferencias de la comparacion
+2024-01-31 09:35:28,846 - INFO - --------------------------------------------------------------
+
+2024-01-31 09:36:18,442 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:36:18,443 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:36:20,101 - INFO - Se encontraron 5 componentes con Skip, no.parte ['016-0176-01' '027-0059-00' '114-0001-02' '114-0001-02' '014-20372-15X'] y referencia ['D1' 'L1' 'R3' 'R4' 'U1']
+2024-01-31 09:36:24,681 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 09:36:25,785 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:36:25,785 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:36:25,791 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\20642-1C\20642-1C.csv con las diferencias de la comparacion
+2024-01-31 09:36:25,791 - INFO - --------------------------------------------------------------
+
+2024-01-31 09:37:19,307 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:37:19,308 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:37:23,879 - INFO - Se encontraron 5 componentes con Skip, no.parte ['016-0176-01' '027-0059-00' '114-0001-02' '114-0001-02' '014-20372-15X'] y referencia ['D1' 'L1' 'R3' 'R4' 'U1']
+2024-01-31 09:37:25,952 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 09:37:25,953 - INFO - Se encontraron componentes sin asignar en el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 09:37:27,526 - INFO - Se encontraron 3 componentes sin asignar, no.parte ['016-0176-01' '027-0059-00' '114-0001-02'] y referencia ['D1' 'L1' 'R3']
+2024-01-31 09:37:29,741 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 09:37:30,481 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:37:30,481 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:37:30,489 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\20642-1C\20642-1C.csv con las diferencias de la comparacion
+2024-01-31 09:37:30,490 - INFO - --------------------------------------------------------------
+
+2024-01-31 09:48:57,255 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:48:57,257 - INFO - Se reviso archivo placement H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y se encontraron componentes con skip
+2024-01-31 09:48:58,546 - INFO - Se encontraron 5 componentes con Skip, no.parte ['016-0176-01' '027-0059-00' '114-0001-02' '114-0001-02' '014-20372-15X'] y referencia ['D1' 'L1' 'R3' 'R4' 'U1']
+2024-01-31 09:49:02,675 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 09:49:02,676 - INFO - Se reviso archivo placement H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y se encontraron componentes sin asignar
+2024-01-31 09:49:03,701 - INFO - Se encontraron 3 componentes sin asignar, no.parte ['016-0176-01' '027-0059-00' '114-0001-02'] y referencia ['D1' 'L1' 'R3']
+2024-01-31 09:49:08,029 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 09:49:08,909 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:49:08,909 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 09:49:08,920 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\20642-1C\20642-1C.csv con las diferencias de la comparacion
+2024-01-31 09:49:08,920 - INFO - --------------------------------------------------------------
+
+2024-01-31 14:13:18,011 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 14:13:18,014 - INFO - Se reviso archivo placement H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y se encontraron componentes con skip
+2024-01-31 14:13:18,952 - INFO - Se encontraron 5 componentes con Skip, no.parte ['016-0176-01' '027-0059-00' '114-0001-02' '114-0001-02' '014-20372-15X'] y referencia ['D1' 'L1' 'R3' 'R4' 'U1']
+2024-01-31 14:13:21,351 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 14:13:21,352 - INFO - Se reviso archivo placement H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y se encontraron componentes sin asignar
+2024-01-31 14:13:22,626 - INFO - Se encontraron 3 componentes sin asignar, no.parte ['016-0176-01' '027-0059-00' '114-0001-02'] y referencia ['D1' 'L1' 'R3']
+2024-01-31 14:13:24,490 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 14:13:25,384 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 14:13:25,384 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 14:13:25,395 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\20642-1C\20642-1C.csv con las diferencias de la comparacion
+2024-01-31 14:13:25,396 - INFO - --------------------------------------------------------------
+
+2024-01-31 14:15:14,969 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 14:15:14,971 - INFO - Se reviso archivo placement H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y se encontraron componentes con skip
+2024-01-31 14:15:15,760 - INFO - Se encontraron 5 componentes con Skip, no.parte ['016-0176-01' '027-0059-00' '114-0001-02' '114-0001-02' '014-20372-15X'] y referencia ['D1' 'L1' 'R3' 'R4' 'U1']
+2024-01-31 14:15:17,561 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 14:15:17,561 - INFO - Se reviso archivo placement H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y se encontraron componentes sin asignar
+2024-01-31 14:15:18,482 - INFO - Se encontraron 3 componentes sin asignar, no.parte ['016-0176-01' '027-0059-00' '114-0001-02'] y referencia ['D1' 'L1' 'R3']
+2024-01-31 14:15:20,234 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 14:15:21,141 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 14:15:21,141 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 14:15:21,153 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\20642-1C\20642-1C.csv con las diferencias de la comparacion
+2024-01-31 14:15:21,153 - INFO - --------------------------------------------------------------
+
+2024-01-31 14:34:29,590 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 14:34:29,593 - INFO - Se reviso archivo placement H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y se encontraron componentes con skip
+2024-01-31 14:34:31,066 - INFO - Se encontraron 5 componentes con Skip, no.parte ['016-0176-01' '027-0059-00' '114-0001-02' '114-0001-02' '014-20372-15'] y referencia ['D1' 'L1' 'R3' 'R4' 'U1']
+2024-01-31 14:34:32,724 - INFO - Se decidio continuar con la comparacion del archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 14:34:36,380 - INFO - Se encontraron diferencias entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 14:34:36,380 - INFO - Se realizo la comparacion entre H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 14:34:36,412 - INFO - Se genero el CSV H:\Ingenieria\SMT\Flexa_vs_BOM\20642-1C\20642-1C.csv con las diferencias de la comparacion
+2024-01-31 14:34:36,412 - INFO - --------------------------------------------------------------
+
+2024-01-31 14:35:00,337 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 14:35:00,347 - INFO - No se encontraron diferencias en comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 14:35:03,003 - ERROR - cannot unpack non-iterable bool object
+2024-01-31 14:35:04,841 - INFO - Comienza la comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx vs H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx
+2024-01-31 14:35:04,851 - INFO - No se encontraron diferencias en comparacion con el archivo H:/Temporal/Echevarria/pruebas_comparador/20642-1C/SV9_007 (3).xlsx y H:/Temporal/Echevarria/pruebas_comparador/20642-1C/20642-1C.xlsx
+2024-01-31 14:35:09,316 - ERROR - cannot unpack non-iterable bool object

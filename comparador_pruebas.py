@@ -6,11 +6,12 @@ import PySimpleGUI as sg
 import os
 import logger
 import functools as ft
+
 #configuracion de logger
 #logger = logger.setup_logger(r'H:\Ingenieria\SMT\Flexa_vs_BOM\comp.log')
 logger = logger.setup_logger(r'comparador\comp.log')
 
-#......................:::: CONFIGURACION DEL DATAFRAME ::::..................
+#......................:::: CONFIGURACION DEL DATAFRAME ::: :..................
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 pd.set_option('display.width', None)
@@ -42,16 +43,14 @@ def comparador(ruta_bom,ruta_flexa):
     bom_filter = bom_filter[bom_filter['Level'] != 2]
     bom_filter = bom_filter[['Operation','Part Number','Description','Reference']]
     #print(bom_filter)
-    
     #bom_filter.to_csv(r'C:\Users\CECHEVARRIAMENDOZA\OneDrive - Brunswick Corporation\Documents\Proyectos_Python\PysimpleGUI\Proyectos\comparador\csv\bom_filter.csv',index=False)
 
     
     #******************************************************************* PLACEMENT ******************************************************************
     #Carga y conversion de placement flexa a dataframe
-    #nombre_placement = r'C:\Users\CECHEVARRIAMENDOZA\OneDrive - Brunswick Corporation\Documents\Proyectos_Python\PysimpleGUI\Proyectos\comparador\29736-1B.xlsx'
-    
     flexa = pd.read_excel(ruta_flexa, engine='openpyxl')                                                # leemos el archivo excel de flexa
-    # implementacion funcion validar_panel
+    
+    # implementar funcion validar_panel
     # if validar_panel(flexa) == True:
     #     sg.popup("Placement validado")
     #     pass
@@ -63,10 +62,12 @@ def comparador(ruta_bom,ruta_flexa):
     placement = pd.DataFrame(flexa)                                                                     # convertimos a dataframe
     placement.rename(columns={'Ref.':'Reference'},inplace=True)                                         # Renombramos columna(Ref. a Reference)
     logger.info(f"Comienza la comparacion con el archivo {ruta_flexa} vs {ruta_bom}")
-    placement = placement[['Board','Part Number','Reference','Skip','Assign']]                                   # Seleccionamos las columnas deseadas(Board,Part Number,Reference,Skip)
+    placement = placement[['Board','Part Number','Reference','Skip','Assign']]                          # Seleccionamos las columnas deseadas
+    
+    # validar si hay componentes con skip
     if "Yes" in placement['Skip'].values:                                                               # Si se encuentra skip en el archivo
         #print(placement['Skip'].values == "Yes")                                                       # alertamos al usuario 
-        logger.info(f'Se realizo la comparacion entre {ruta_flexa} y {ruta_bom}')
+        logger.info(f'Se reviso archivo placement {ruta_flexa} y se encontraron componentes con skip')
         title = "! Alerta !"
         message = """Se encontraron componentes con skip en el archivo!"""
         sg.popup(message, title=title)
@@ -86,6 +87,29 @@ def comparador(ruta_bom,ruta_flexa):
             # salimos del programa si no quiere continuar
             return
     
+    
+    # validar si hay componentes sin asignar ( valores nan)
+    if placement['Assign'].isna().any():
+        # Si se encuentra vacio el assign para un no.part en el archivo
+        logger.info(f'Se reviso archivo placement {ruta_flexa} y se encontraron componentes sin asignar')
+        title = "! Alerta !"
+        message = """Se encontraron componentes sin asignar en el archivo!"""
+        sg.popup(message, title=title)
+        sin_asignar = placement[placement['Assign'].isna()]
+        logger.info(f"Se encontraron {len(sin_asignar)} componentes sin asignar, no.parte {sin_asignar['Part Number'].values} y referencia {sin_asignar['Reference'].values}")
+        sin_asignar = sin_asignar[['Board','Part Number','Reference']]
+        data_to_display = sin_asignar.values.tolist()                                                   # convertimos a lista todos los elementos sin asignar
+        table(data_to_display,sin_asignar)                                                             # creamos la tabla y desplegamos la tabla
+        respuesta = sg.popup_yes_no("Desea continuar?",title=title)
+        if respuesta == "Yes":
+            logger.info(f"Se decidio continuar con la comparacion del archivo {ruta_flexa}")
+            #adaptar comparacion + componentes sin asignar
+            pass
+        else:
+            logger.info(f"No se realizo la comparacion del archivo {ruta_flexa}")
+            # salimos del programa si no quiere continuar
+            return 
+    
     #******************************************************************* COMPARACION ******************************************************************
     comparacion = bom_filter.merge(placement, on = ['Part Number','Reference'], how='outer',suffixes=('_izq', '_der'), indicator=True)          # Juntamos los dataframes
     comparacion.rename(columns={'_merge':'Comparacion'},inplace=True)                                                                           # renombramos la columna merge por Comparacion
@@ -94,16 +118,18 @@ def comparador(ruta_bom,ruta_flexa):
     'right_only': 'Solo en Placement',
     'both': 'En ambos archivos'
     })
+    
     only_bom = comparacion[comparacion['Comparacion'] == 'left_only']
     only_placement = comparacion[comparacion['Comparacion'] == 'right_only']
     # comparacion final sera las diferencias de ambos archivos y ademas los componentes que lleven yes en skip
-    comparacion_final = comparacion[(comparacion['Comparacion'] != 'En ambos archivos') | ((comparacion['Skip'] == 'Yes') | (comparacion['Skip'].isna()))]
+    comparacion_final = comparacion[(comparacion['Comparacion'] != 'En ambos archivos') | ((comparacion['Skip'] == 'Yes') | (comparacion['Skip'].isna()) | (comparacion['Assign'] == "") | (comparacion['Assign'].isna()))]
     
     # retiramos la fila completa si se encuentra un No.Parte en la columna No.Parte
     comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('017-')]
     #comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('014-')]  // esto es un numero de parte!!
     comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('051-')]
     comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('140-')]
+    comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('124-')]
     
     print("comparacion final es vacia: ",comparacion_final.empty) #hasta ese punto si no hay diferencias el dataframe es vacio
     print("comparacion final: ",comparacion_final)  
@@ -134,7 +160,7 @@ def comparador(ruta_bom,ruta_flexa):
         comparacion_final.to_csv(ruta_csv,index=False)
         logger.info(f'Se genero el CSV {ruta_csv} con las diferencias de la comparacion')
         logger.info("--------------------------------------------------------------\n")
-        return True
+        return True,ruta_csv
         
 def comparacion_nexim(ruta_bom,ruta_nexim):
     #************************************************************** SYTELINE ******************************************************************
