@@ -5,9 +5,8 @@ def setup_logger(log_file):
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
 
-    # Crear un formateador de registro
+    # Crear un formateador de registro (yyyy MM dd - HH:MM:SS - Level - Message)
     formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-
     # Crear un manejador para escribir los registros en un archivo
     file_handler = logging.FileHandler(log_file)
     file_handler.setLevel(logging.DEBUG)

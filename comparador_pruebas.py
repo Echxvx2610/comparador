@@ -85,7 +85,7 @@ def comparador(ruta_bom,ruta_flexa):
         else:                                                                                
             logger.info(f"No se realizo la comparacion del archivo {ruta_flexa}")
             # salimos del programa si no quiere continuar
-            return
+            return 
     
     
     # validar si hay componentes sin asignar ( valores nan)
@@ -131,13 +131,14 @@ def comparador(ruta_bom,ruta_flexa):
     comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('140-')]
     comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('124-')]
     
+    
     print("comparacion final es vacia: ",comparacion_final.empty) #hasta ese punto si no hay diferencias el dataframe es vacio
     print("comparacion final: ",comparacion_final)  
     
     if comparacion_final.empty:
         logger.info(f"No se encontraron diferencias en comparacion con el archivo {ruta_bom} y {ruta_flexa}")
         sg.popup('No se encontraron diferencias :)')
-        return False
+        return None,None
     else:
         sg.popup('Se encontraron diferencias :O')
         logger.info(f"Se encontraron diferencias entre {ruta_flexa} y {ruta_bom}")
@@ -175,22 +176,26 @@ def comparacion_nexim(ruta_bom,ruta_nexim):
     #bom_filter.to_csv(r'C:\Users\CECHEVARRIAMENDOZA\OneDrive - Brunswick Corporation\Documents\Proyectos_Python\PysimpleGUI\Proyectos\comparador\csv\bom.csv',index=False)  
     bom_filter['Reference'] = bom_filter['Reference'].str.split()                                      
     bom_filter = bom_filter.explode('Reference')                                                      
-    bom_filter.reset_index(drop=True,inplace=True)                                                    
+    bom_filter.reset_index(drop=True,inplace=True)
+                                                        
     # Si hay elementos con un valor 2 en el level se descarta el elemento
     bom_filter = bom_filter[bom_filter['Level'] != 2]
     bom_filter = bom_filter[['Operation','Part Number','Description','Reference']]
     #print(bom_filter)
     #bom_filter.to_csv(r'comparador\bom_filter_nexim.csv',index=False)
     
+    
     #******************************************************************* PLACEMENT ******************************************************************
     #Carga y conversion de placement nexim a dataframe
     nexim = pd.read_excel(ruta_nexim, engine='openpyxl')                                              
     placement = pd.DataFrame(nexim)                                                                    
     placement.rename(columns={'Ref.':'Reference'},inplace=True)
-    placement = placement[['Board','Part Number','Reference','Skip']]
+    placement = placement[['Board','Part Number','Reference','Skip','Assign']]
     logger.info(f"Comienza la comparacion con el archivo {ruta_nexim} vs {ruta_bom}")
-    #Revisamos si hay yes en Skip
+    
+    # Validar que no existan componentes con Skip
     placement = placement[~placement['Part Number'].str.startswith("NOT")]
+    
     if "Yes" in placement['Skip'].values:
         title = "! Alerta !"
         message = """Se encontraron componentes con skip en el archivo!"""
@@ -203,44 +208,81 @@ def comparacion_nexim(ruta_bom,ruta_nexim):
         respuesta = sg.popup_yes_no("¿Desea continuar?",title = title)
         if respuesta == 'Yes':
             logger.info(f"Se decidio continuar con la comparacion del archivo {ruta_nexim}")
-            placement = placement
+            # placement = placement
+            pass
         else:
             logger.info(f"No se realizo la comparacion del archivo {ruta_nexim}")
             return
     
+    # Validar si hay comoponentes sin asignar
+    if placement['Assign'].isna().any():
+        logger.info(f"Se reviso archivo placement {ruta_nexim} y se encontraron componentes sin asignar")
+        title = "! Alerta !"
+        message = """Se encontraron componentes sin asignar en el archivo!"""
+        sg.popup(message,title = title)
+        sin_asignar = placement[placement['Assign'].isna()]
+        logger.info(f"Se encontraron {len(sin_asignar)} componentes sin asignar, no.parte {sin_asignar['Part Number'].values} y referencia {sin_asignar['Reference'].values}")
+        sin_asignar = sin_asignar[['Board','Part Number','Reference']]
+        data_to_display = sin_asignar.values.tolist()
+        table(data_to_display,sin_asignar)
+        respuesta = sg.popup_yes_no("¿Desea continuar?",title = title)
+        if respuesta == 'Yes':
+            logger.info(f"Se decidio continuar con la comparacion del archivo {ruta_nexim}")
+            # placement = placement
+            pass
+        else:
+            logger.info(f"No se realizo la comparacion del archivo {ruta_nexim}")
+            return
+    
+    
+    #****************************************************************** COMPARACION ******************************************************************
     # Unimos ambos archivos y creamos el csv de comparacion
     comparacion = bom_filter.merge(placement,how='outer',on=['Part Number','Reference'],suffixes=('_bom','_placement'),indicator=True)
     #print(comparacion[comparacion['_merge']!='both'])
     comparacion.rename(columns={'_merge':'Comparacion'},inplace=True)
     comparacion["Comparacion"] = comparacion["Comparacion"].replace({
-        "left_only": "En Bom",
-        "right_only": "En Nexim",
+        "left_only": "Solo en Bom",
+        "right_only": "Solo en Nexim",
         "both": "En ambos archivos"
     })
     # comparacion final sera las diferencias de ambos archivos y ademas los componentes que lleven yes en skip
-    comparacion_final = comparacion[(comparacion['Comparacion'] != 'En ambos archivos') | ((comparacion['Skip'] == 'Yes') | (comparacion['Skip'].isna()))]
+    comparacion_final = comparacion[(comparacion['Comparacion'] != 'En ambos archivos') | ((comparacion['Skip'] == 'Yes') | (comparacion['Skip'].isna()) | (comparacion['Assign']=="") | (comparacion['Assign'].isna()))]
     #comparacion_final = comparacion[comparacion['Comparacion']!='En ambos archivos']
+    
+    # retiramos la fila completa si se encuentra un No.Parte en la columna No.Parte
+    comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('017-')]
+    #comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('014-')]  // esto es un numero de parte!!
+    comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('051-')]
+    comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('140-')] 
+    
+    print("Comparacion final es vacia: ",comparacion_final.empty)
+    print("Comparacion final: ",comparacion_final)
+    
     if comparacion_final.empty:
         logger.info(f"No se encontraron diferencias en comparacion con el archivo {ruta_bom} y {ruta_nexim}")
         sg.popup('No se encontraron diferencias :)')
-        return False
+        return None,None
     else:
         logger.info(f"Se encontraron diferencias entre {ruta_bom} y {ruta_nexim}")
         sg.popup('Se encontraron diferencias :O')
+        # creamos la carpeta y el csv de la comparacion
         nombre_excel_sin_extension = os.path.splitext(os.path.basename(ruta_nexim))[0]
+        logger.info(f"Se realizo la comparacion entre {ruta_nexim} y {ruta_bom}")
         carpeta_nombre_archivo = r"H:\Ingenieria\SMT\Flexa_vs_BOM\Nexim\{nombre_excel_sin_extension}".format(nombre_excel_sin_extension=nombre_excel_sin_extension)
         os.makedirs(carpeta_nombre_archivo, exist_ok=True)
         ruta_csv = os.path.join(carpeta_nombre_archivo,f'{nombre_excel_sin_extension}.csv')
+        
         # retiramos la fila completa si se encuentra un No.Parte en la columna No.Parte
         comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('017-')]
         #comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('014-')]  // esto es un numero de parte!!
         comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('051-')]
-        comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('140-')]  
-        comparacion_final = comparacion_final[['Operation','Board','Part Number','Reference','Skip','Description','Comparacion']]          
+        comparacion_final = comparacion_final[~comparacion_final['Part Number'].str.startswith('140-')]
+        comparacion_final = comparacion_final[['Operation','Board','Reference','Part Number','Skip','Assign','Description','Comparacion']]          
+        # guardamos el csv
         comparacion_final.to_csv(ruta_csv,index=False)
         logger.info(f"Se genero el CSV {ruta_csv} con las diferencias entre {ruta_bom} y {ruta_nexim}")
         logger.info("----------------------------------------------------------------------------------")
-        return True
+        return True,ruta_csv
            
 #Comparacion entre bom y placement 
 def comparacion_bom(ruta_bom,ruta_bom2):
@@ -288,11 +330,13 @@ def comparacion_bom(ruta_bom,ruta_bom2):
     # si no hay diferencias solo alerta un Pop up completado con exito!, si hay diferencias crea el archivo csv
     if comparacion_final.empty:
         sg.popup('No hay diferencias entre los BOM :)')
-        return False
+        logger.info(f'No se encontraron diferencias entre los BOM {ruta_bom} y {ruta_bom2}')
+        return None,None
     else:
+        logger.info(f'Se encontraron diferencias entre los BOM {ruta_bom} y {ruta_bom2}')
         sg.popup('Se han encontrado diferencias entre los BOM :O')
         ## Comparacion final sera un dataframe que contenga los datos que sean diferentes en ambos archivos pero no es necesario mostrar los no.part que contenga NOT IN BOM
-        nombre_excel_sin_extension = os.path.splitext(os.path.basename(ruta_bom))[0]
+        nombre_excel_sin_extension = os.path.splitext(os.path.basename(ruta_bom2))[0]
         carpeta_nombre_archivo = r"H:\Ingenieria\SMT\Flexa_vs_BOM\BOM\{nombre_excel_sin_extension}".format(nombre_excel_sin_extension=nombre_excel_sin_extension)
         os.makedirs(carpeta_nombre_archivo, exist_ok=True)
         ruta_csv = os.path.join(carpeta_nombre_archivo,f"{nombre_excel_sin_extension}.csv")
@@ -300,7 +344,7 @@ def comparacion_bom(ruta_bom,ruta_bom2):
         comparacion_final.to_csv(ruta_csv,index=False)
         logger.info(f'Se realizo la comparacion entre los BOM y se genero el CSV {ruta_csv}')
         logger.info('--------------------------------------------------------------\n')   
-        return True
+        return True, ruta_csv
     
     
 def table(data_to_display,skipeados):

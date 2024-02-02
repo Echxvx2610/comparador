@@ -47,15 +47,7 @@ def main():
                         resizable=False,
                         )
     
-    #............................::::::: Comparacion Flexa vs BOM :::::::...............................
-    def flexa_vs_bom():
-        return comparador(values['-BOM-'],values['-FLEXA-'])
-        
-        
-    def reset():
-        window['-BOM-'].update('Ruta archivo Syteline')
-        window['-FLEXA-'].update('Ruta archivo Placement Flexa ')
-    
+    # **************************** Funciones para abrir archivos y carpetas ****************************
     def open_excel_and_get_path(file_path):
         try:
             # Abrir el archivo con Excel
@@ -79,25 +71,33 @@ def main():
                 logger.error(f"No se pudo abrir la carpeta:\n\n{e}")
         else:
             sg.popup_error("La carpeta no existe.")   
-    
+    #****************************************** Manejo de eventos ********************************************
     while True:
         event,values = window.read()
         
         if event == '-SALIR-' or event == '-SALIR2-' or event == '-SALIR3-' or event == sg.WIN_CLOSED:
             break
         
+        # ......................................:::::   Comparacion Flexa vs BOM      ::::::...............................
+        def flexa_vs_bom():
+            return comparador(values['-BOM-'],values['-FLEXA-'])
+            
+            
+        def reset():
+            window['-BOM-'].update('Ruta archivo Syteline')
+            window['-FLEXA-'].update('Ruta archivo Placement Flexa ')
+        
         if event == '-COMPARE-':
             try:
                 differences_found, csv_path = flexa_vs_bom()
                 reset()
-                if differences_found is True:
-                    # Abre el explorador de archivos en la ruta específica
-                    #csv_folder = r"H:\Ingenieria\SMT\Flexa_vs_BOM"
-                    #open_folder_in_explorer(csv_folder)
-                    
-                    os.startfile(csv_path)
+                if differences_found is not None:
+                    if differences_found:
+                        os.startfile(csv_path)
+                    else:
+                        sg.popup('No se encontraron diferencias en el archivo')
             except Exception as e:
-                sg.popup('No se pudo realizar la comparacion,\nIntentelo de nuevo')
+                sg.popup('No se pudo realizar la comparacion!,\nIntentelo de nuevo')
                 logger.error(str(e))
                 
         if event == '-OPEN-':
@@ -118,12 +118,13 @@ def main():
             
         if event == '-COMPARE2-':
             try:
-                differences_found = nexim_vs_bom()
+                differences_found, csv_path = nexim_vs_bom()
                 reset_nexim()
-                if differences_found is True:
-                    csv_folder_nexim = r"H:\Ingenieria\SMT\Flexa_vs_BOM\Nexim"
-                    # Abre el explorador de archivos en la ruta unica
-                    open_folder_in_explorer(csv_folder_nexim)
+                if differences_found is not None:
+                    if differences_found:
+                        os.startfile(csv_path)
+                    else:
+                        sg.popup('No se encontraron diferencias en el archivo')
             except Exception as e:
                 sg.popup('No se pudo realizar la comparacion,\nIntentelo de nuevo')
                 logger.error(str(e))
@@ -146,12 +147,13 @@ def main():
             
         if event == '-COMPARE3-':
             try:
-                differences_found = bom_vs_bom()
+                differences_found , csv_path = bom_vs_bom()
                 reset_bom()
-                if differences_found is True:    
-                    csv_folder = r"H:\Ingenieria\SMT\Flexa_vs_BOM\BOM"
-                    # Abre el explorador de archivos en la ruta específica
-                    open_folder_in_explorer(csv_folder)
+                if differences_found is not None:
+                    if differences_found:
+                        os.startfile(csv_path)
+                    else:
+                        sg.popup('No se encontraron diferencias en el archivo')
             except Exception as e:
                 sg.popup('No se pudo realizar la comparacion,\nIntentelo de nuevo')
                 logger.error(str(e))
